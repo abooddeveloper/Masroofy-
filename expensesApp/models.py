@@ -12,7 +12,8 @@ class Cycle(models.Model):
     total_allowance=models.DecimalField(max_digits=10,decimal_places=2)
     is_active=models.BooleanField(default=True)
 
-
+    def __str__(self):
+        return str(self.start_date)+'----'+ str(self.end_date)
 
 
 class Category(models.Model):
