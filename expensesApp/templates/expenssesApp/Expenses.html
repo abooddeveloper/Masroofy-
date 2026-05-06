@@ -2,7 +2,7 @@
 {% load static %}
 
 {%  block content  %}
-    {% include 'navbar.html' %}
+
 {% if user.is_authenticated %}
 {% if expenses %}
     {% for expense in expenses %}

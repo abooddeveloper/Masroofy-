@@ -22,9 +22,17 @@
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            <li{% if message.tags %} class="tags {{ message.tags }}"{% endif %}>{{ message }}</li>
             {% endfor %}
         </ul>
+            <script>
+                setTimeout(function(){
+                    let messages=document.querySelectorAll(".tags");
+                    messages.forEach(function(message){
+                        message.style.display='none';
+                    })
+                },5000)
+            </script>
         {% endif %}
 
         {% if page == "register" %}

@@ -7,7 +7,6 @@ from .models import userRegistration
 def register(request):
     page="register"
     form=registration_login_form()
-    print("Form fields:", list(form.fields.keys()))  # See what fields exist
     if request.method=="POST":
         form=registration_login_form(request.POST)
         if form.is_valid():
@@ -15,7 +14,7 @@ def register(request):
             return redirect('login')
     return render(request,'registerLogin/registerLogin.html',{'form':form,'page':page})
 
-# messages.error(request, "Document deleted.")
+
 
 def loginUser(request):
     page="login"
@@ -34,9 +33,9 @@ def loginUser(request):
                 user.is_first_login=False
                 user.save()
                 login(request, user)
-                # return redirect('setupPage')
+                return redirect('setCycle')
             login(request, user)
-            return redirect('dislpayExpenses')
+            return redirect('spendingInsights')
         else:
             messages.error(request,"May be password is incorrect")
 
@@ -48,3 +47,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+
+
+

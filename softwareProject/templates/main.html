@@ -21,7 +21,7 @@
         <div class="no-cycle-box">
             <h2>Welcome, {{ user.username }}! 👋</h2>
             <p>You have not set up a budget cycle yet.<br>
-               Set your allowance and duration to start tracking your spending.</p>
+            Set your allowance and duration to start tracking your spending.</p>
             <a href="{% url 'setCycle' %}" class="btn btn-primary">Set Up Budget Cycle</a>
         </div>
     </div>
@@ -83,7 +83,7 @@
             <div class="progress-wrap">
                 <div class="progress-bg">
                     <div class="progress-fill {% if progress_percent >= 90 %}danger{% endif %}"
-                         style="width: {{ progress_percent }}%;"></div>
+                        style="width: {{ progress_percent }}%;"></div>
                 </div>
                 <div class="progress-labels">
                     <span>{{ progress_percent }}% spent</span>

@@ -211,3 +211,47 @@ def spendingInsights(request):
         'total_spent':   total_spent,
         'category_rows': category_rows,
     })
+
+@login_required(login_url='login')
+def category_list(request):
+    categories = Category.objects.filter(user=request.user).order_by('name')
+    return render(request, 'expenssesApp/category_list.html', {
+        'categories': categories
+    })
+
+
+@login_required(login_url='login')
+def edit_category(request, category_id):
+    """Edit existing category"""
+    category = Category.objects.get(id=category_id, user=request.user)
+    
+    if request.method == "POST":
+        form = categoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Category "{category.name}" updated successfully!')
+            return redirect('category_list')
+        else:
+            messages.error(request, 'Please correct the errors below')
+    else:
+        form = categoryForm(instance=category)
+    
+    return render(request, 'expenssesApp/edit_category.html', {
+        'form': form,
+        'category': category
+    })
+
+
+
+@login_required(login_url='login')
+def delete_category(request, category_id):
+    """Delete a category"""
+    category = Category.objects.get( id=category_id, user=request.user)
+    
+    if request.method == "POST":
+        category_name = category.name
+        category.delete()
+        messages.success(request, f'Category "{category_name}" deleted successfully!')
+        return redirect('category_list')
+    
+    return render(request, 'expenssesApp/delete_category.html', {'category': category})
