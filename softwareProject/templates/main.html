@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masroofy</title>
+    <link rel="stylesheet" href="{% static 'css/masroofy.css' %}">
+</head>
+<body>
+
+{% block content %}
+
+{% include 'navbar.html' %}   <!-- النافبار هنا جوه البلوك، عشان يظهر في الصفحة الرئيسية بس -->
+
+{% if user.is_authenticated %}
+
+    {% if status == 'no_cycle' %}
+    <!-- ── No cycle: call to action ─────────────────────────────────────── -->
+    <div class="page-wrapper">
+        <div class="no-cycle-box">
+            <h2>Welcome, {{ user.username }}! 👋</h2>
+            <p>You have not set up a budget cycle yet.<br>
+               Set your allowance and duration to start tracking your spending.</p>
+            <a href="{% url 'setCycle' %}" class="btn btn-primary">Set Up Budget Cycle</a>
+        </div>
+    </div>
+
+    {% else %}
+    <!-- ── US2: Safe Daily Limit dashboard ──────────────────────────────── -->
+    <div class="page-wrapper">
+
+        {% if over_daily_limit %}
+        <ul class="messages">
+            <li class="warning">
+                ⚠️ You have spent ${{ today_spent|floatformat:2 }}
+                while your safe daily limit is ${{ safe_daily_limit|floatformat:2 }}
+            </li>
+        </ul>
+        {% endif %}
+
+        <div class="limit-hero">
+            <div class="card-title">
+                Safe Daily Limit
+                {% if status == 'active' %}
+                    <span class="status-badge badge-active">Active</span>
+                {% elif status == 'overspent' %}
+                    <span class="status-badge badge-overspent">Over Budget</span>
+                {% elif status == 'ended' %}
+                    <span class="status-badge badge-ended">Cycle Ended</span>
+                {% endif %}
+            </div>
+
+            {% if safe_daily_limit >= 0 %}
+                <div class="limit-amount">${{ safe_daily_limit|floatformat:2 }}</div>
+                <div class="limit-sub">
+                    per day &mdash; {{ days_remaining }} day{{ days_remaining|pluralize }} remaining
+                    (cycle ends {{ cycle.end_date }})
+                </div>
+            {% else %}
+                <div class="limit-amount overspent">Over budget!</div>
+                <div class="limit-sub">You have exceeded your total allowance for this cycle.</div>
+            {% endif %}
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-label">Total Allowance</div>
+                <div class="stat-value">${{ cycle.total_allowance|floatformat:2 }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Spent So Far</div>
+                <div class="stat-value">${{ total_spent|floatformat:2 }}</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Remaining</div>
+                <div class="stat-value">${{ remaining_budget|floatformat:2 }}</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Spending Progress</div>
+            <div class="progress-wrap">
+                <div class="progress-bg">
+                    <div class="progress-fill {% if progress_percent >= 90 %}danger{% endif %}"
+                         style="width: {{ progress_percent }}%;"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>{{ progress_percent }}% spent</span>
+                    <span>{{ cycle.start_date }} &rarr; {{ cycle.end_date }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="{% url 'addExpense' %}" class="btn btn-primary">+ Add Expense</a>
+            <a href="{% url 'spendingInsights' %}" class="btn btn-secondary">📊 Spending Insights</a>
+            <a href="{% url 'setCycle' %}" class="btn btn-secondary">⚙ Edit Cycle</a>
+        </div>
+
+    </div>
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}
+
+</body>
+</html>

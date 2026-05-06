@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%  block content  %}
+    {% include 'navbar.html' %}
+{% if user.is_authenticated %}
+{% if expenses %}
+    {% for expense in expenses %}
+    <p>{{expense.time_stamp}} </p>
+    <p><img src="{{ expense.category.icon.url }}" alt="category icon"> category: {{expense.category}}</p>
+    <p>amount: ${{expense.amount}}</p>
+    <hr>
+    {% endfor %}
+{% else %}
+<p>No Transactions Found</p>
+<a href="{% url 'addExpense' %}"> Log your first expense </a>
+{% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card">
+
+        <div class="auth-logo">Masroofy<span>.</span></div>
+        <div class="auth-subtitle">
+            {% if page == "register" %}Create your account{% else %}Sign in to your account{% endif %}
+        </div>
+
+        <!-- Tabs -->
+        <div class="auth-tabs">
+            <a href="{% url 'login' %}"
+               class="auth-tab {% if page == 'login' %}active{% endif %}">Login</a>
+            <a href="{% url 'register' %}"
+               class="auth-tab {% if page == 'register' %}active{% endif %}">Register</a>
+        </div>
+
+        <!-- Flash messages -->
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if page == "register" %}
+        <!-- ── Register form ──────────────────────────────────────────────── -->
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                <div class="form-error">{{ error }}</div>
+                {% endfor %}
+                {% if field.help_text %}
+                <div class="form-hint">{{ field.help_text }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <input type="submit" value="Create Account" style="width:100%; margin-top:8px;">
+        </form>
+
+        {% else %}
+        <!-- ── Login form ─────────────────────────────────────────────────── -->
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" placeholder="Enter your username">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" placeholder="Enter your password">
+            </div>
+            <input type="submit" value="Sign In" style="width:100%; margin-top:8px;">
+        </form>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

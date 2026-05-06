@@ -1,0 +1,121 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<h2>Spending Insights</h2>
+<p>A breakdown of your expenses by category for the current cycle.</p>
+
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+
+<style>
+    /* ── Pure-CSS horizontal bar chart ─────────────────────────────────────── */
+
+    .bar-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+
+    .bar-table th {
+        text-align: left;
+        padding: 6px 8px;
+        border-bottom: 2px solid #333;
+        font-size: 0.85rem;
+    }
+
+    .bar-table td {
+        padding: 8px;
+        vertical-align: middle;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* The track is a fixed-width cell; the fill is an inline-block div */
+    .bar-track {
+        display: block;
+        width: 300px;           /* fixed track width */
+        height: 20px;
+        background: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .bar-fill {
+        display: block;
+        height: 100%;
+        border-radius: 4px;
+        /* width and background-color are set inline from Django context */
+    }
+
+    .color-dot {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    .pct-cell { width: 50px; text-align: right; font-size: 0.85rem; color: #555; }
+    .amt-cell { width: 90px; text-align: right; font-weight: bold; }
+</style>
+
+{% if not cycle %}
+    <p>You do not have an active budget cycle yet.</p>
+    <p><a href="{% url 'setCycle' %}">Set up your budget cycle</a> to start tracking expenses.</p>
+
+{% elif not category_rows %}
+    <p>No expenses recorded for this cycle yet.</p>
+    <p><a href="{% url 'addExpense' %}">Add your first expense</a> to see insights here.</p>
+
+{% else %}
+
+    <p><strong>Total spent this cycle:</strong> ${{ total_spent|floatformat:2 }}</p>
+    <p><strong>Cycle:</strong> {{ cycle.start_date }} &rarr {{ cycle.end_date }}</p>
+
+    <!--
+        Pure-CSS horizontal bar chart.
+        Each bar's width is set as an inline percentage that Django computed
+        server-side from (amount / total_spent * 100).
+        No JavaScript is involved at any point.
+    -->
+    <table class="bar-table">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Spending</th>
+                <th class="pct-cell">%</th>
+                <th class="amt-cell">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in category_rows %}
+            <tr>
+                <td>
+                    <span class="color-dot" style="background: {{ row.color }};"></span>
+                    {{ row.name }}
+                </td>
+                <td>
+                    <span class="bar-track">
+                        <!--
+                            width is the percentage Django sent:
+                            e.g. style="width: 42.5%; background: #6366f1;"
+                            The browser renders the bar with no JS whatsoever.
+                        -->
+                        <span class="bar-fill" style="width: {{ row.percentage }}%; background: {{ row.color }};"></span>
+                    </span>
+                </td>
+                <td class="pct-cell">{{ row.percentage }}%</td>
+                <td class="amt-cell">${{ row.amount|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="{% url 'addExpense' %}">+ Add Expense</a></p>
+
+{% endif %}
+
+<p><a href="{% url 'home' %}">Back to Home</a></p>
+
+{% endblock %}

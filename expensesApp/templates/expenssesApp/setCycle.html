@@ -1,0 +1,61 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<h2>Set Budget Cycle</h2>
+<p>Enter your total cash allowance and how many days this cycle lasts.
+   The system will calculate your starting daily limit automatically.</p>
+
+<!-- Flash messages -->
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+
+<!-- Show current cycle info if one already exists -->
+{% if existing_cycle %}
+<h3>Current Cycle</h3>
+<p><strong>Total Allowance:</strong> ${{ existing_cycle.total_allowance|floatformat:2 }}</p>
+<p><strong>Period:</strong> {{ existing_cycle.start_date }} &rarr; {{ existing_cycle.end_date }}</p>
+{% if preview_daily_limit %}
+<p><strong>Current Safe Daily Limit:</strong> ${{ preview_daily_limit|floatformat:2 }}</p>
+{% endif %}
+<hr>
+{% endif %}
+
+<!-- Input form — plain POST, no JavaScript -->
+<form action="" method="post">
+    {% csrf_token %}
+
+    <p>
+        <label for="{{ form.total_allowance.id_for_label }}">
+            {{ form.total_allowance.label }}
+        </label><br>
+        {{ form.total_allowance }}
+        {% if form.total_allowance.errors %}
+            {% for error in form.total_allowance.errors %}
+                <span style="color:red;">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </p>
+
+    <p>
+        <label for="{{ form.duration_days.id_for_label }}">
+            {{ form.duration_days.label }}
+        </label><br>
+        {{ form.duration_days }}
+        {% if form.duration_days.errors %}
+            {% for error in form.duration_days.errors %}
+                <span style="color:red;">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
+    </p>
+
+    <input type="submit" value="{% if existing_cycle %}Update Cycle{% else %}Start Cycle{% endif %}">
+</form>
+
+<p><a href="{% url 'home' %}">Back to Home</a></p>
+
+{% endblock %}

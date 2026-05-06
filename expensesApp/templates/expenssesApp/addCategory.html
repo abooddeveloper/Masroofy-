@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%  block content  %}
+{% include 'navbar.html' %}
+<h3>Add new category</h3>
+<ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Add category">
+        <p><a href="{% url 'addExpense' %}"> Add Expense </a></p>
+    </form>
+{% endblock %}

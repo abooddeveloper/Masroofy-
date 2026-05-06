@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{%  block content  %}
+{% include 'navbar.html' %}
+    <h3>Add expenses</h3>
+    <form action="" method="post">
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% csrf_token %}
+        {{form.as_p}}
+        <label> Select Category: </label>
+        <p><input  list="categories" name="categories" id="categ">
+        <datalist id="categories">
+            {% for category in categories %}
+            <option value="{{ category }}">
+            {% endfor %}
+        </datalist>
+        </p>
+        <a href="{% url 'addCategory' %}"> Add Category </a>
+        <p><input type="submit" value="Save"></p>
+    </form>
+{% endblock %}
