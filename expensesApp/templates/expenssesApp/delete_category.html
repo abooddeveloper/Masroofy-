@@ -2,11 +2,11 @@
 
 {% block content %}
 <div class="container">
-    <div class="card">
-        <div class="card-header bg-danger text-white">
+    <div>
+        <div>
             <h3>Delete Category</h3>
         </div>
-        <div class="card-body">
+        <div>
             <p>Are you sure you want to delete the category <strong>"{{ category.name }}"</strong>?</p>
             
             {% if category.icon %}
@@ -16,14 +16,14 @@
                 </div>
             {% endif %}
             
-            <p class="text-danger">
+            <p>
                 ⚠️ Warning: This action cannot be undone. Any transactions associated with this category might be affected.
             </p>
             
             <form method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                <a href="{% url 'category_list' %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit">Yes, Delete</button>
+                <a href="{% url 'category_list' %}">Cancel</a>
             </form>
         </div>
     </div>
