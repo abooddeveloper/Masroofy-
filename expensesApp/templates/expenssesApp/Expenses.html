@@ -1,19 +1,29 @@
 {% extends 'main.html' %}
-{% load static %}
 
-{%  block content  %}
+{% block content %}
+<h2 class="section-title">History</h2>
 
-{% if user.is_authenticated %}
-{% if expenses %}
-    {% for expense in expenses %}
-    <p>{{expense.time_stamp}} </p>
-    <p><img src="{{ expense.category.icon.url }}" alt="category icon"> category: {{expense.category}}</p>
-    <p>amount: ${{expense.amount}}</p>
-    <hr>
+<div class="history-container">
+    
+    {% regroup expenses by time_stamp.date as expenses_by_date %}
+
+    {% for date_group in expenses_by_date %}
+        
+        <div class="history-date">{{ date_group.grouper|date:"F j, Y" }}</div>
+        
+        {% for expense in date_group.list %}
+        <div class="history-item">
+            <div class="amount-box amount-expense">-{{ expense.amount|floatformat:0 }}</div>
+            <div>{{ expense.category.name }}</div>
+        </div>
+        {% endfor %}
+
+    {% empty %}
+        <div style="text-align: center; padding: 40px 20px; color: #777;">
+            <p>No expenses logged yet.</p>
+            <a href="{% url 'addExpense' %}" class="btn-outline dark">Log your first expense</a>
+        </div>
     {% endfor %}
-{% else %}
-<p>No Transactions Found</p>
-<a href="{% url 'addExpense' %}"> Log your first expense </a>
-{% endif %}
-{% endif %}
+
+</div>
 {% endblock %}

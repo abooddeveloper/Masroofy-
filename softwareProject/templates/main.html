@@ -8,114 +8,74 @@
     <link rel="stylesheet" href="{% static 'css/masroofy.css' %}">
 </head>
 <body>
+
+{% include 'navbar.html' %}
+
+<div class="page-wrapper">
     
-{% include 'navbar.html' %}   <!-- النافبار هنا جوه البلوك، عشان يظهر في الصفحة الرئيسية بس -->
-
-{% block content %}
-
-{% if user.is_authenticated %}
-
-    {% if status == 'no_cycle' %}
-    <!-- ── No cycle: call to action ─────────────────────────────────────── -->
-    <div class="page-wrapper">
-        <div class="no-cycle-box">
-            <h2>Welcome, {{ user.username }}! 👋</h2>
-            <p>You have not set up a budget cycle yet.<br>
-            Set your allowance and duration to start tracking your spending.</p>
-            <a href="{% url 'setCycle' %}" class="btn btn-primary">Set Up Budget Cycle</a>
-        </div>
-    </div>
-
-    {% else %}
-    <!-- ── US2: Safe Daily Limit dashboard ──────────────────────────────── -->
-    <div class="page-wrapper">
-
-        {% if over_daily_limit %}
-        <ul class="messages">
-            <li class="warning">
-                ⚠️ You have spent ${{ today_spent|floatformat:2 }}
-                while your safe daily limit is ${{ safe_daily_limit|floatformat:2 }}
-            </li>
-        </ul>
-        {% endif %}
-
-        <div class="limit-hero">
-            <div class="card-title">
-                Safe Daily Limit
-                {% if status == 'active' %}
-                    <span class="status-badge badge-active">Active</span>
-                {% elif status == 'overspent' %}
-                    <span class="status-badge badge-overspent">Over Budget</span>
-                {% elif status == 'ended' %}
-                    <span class="status-badge badge-ended">Cycle Ended</span>
-                {% endif %}
+    {% block content %}
+    
+    {% if user.is_authenticated %}
+        {% if status == 'no_cycle' %}
+        <h2 class="section-title">Initialization</h2>
+        <h3 style="text-align: center; color: #4caf50; margin-bottom: 30px;">Initialize Budget</h3>
+        
+        <form action="{% url 'setCycle' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label">Total Budget(EGP)</label>
+                <input type="number" name="total_allowance" class="form-input" placeholder="2000" required>
             </div>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+                <div class="form-group" style="padding: 0;">
+                    <label class="form-label" style="font-size: 0.9em;">Start Date</label>
+                    <input type="date" name="start_date" class="form-input" style="color: #333;">
+                </div>
+                <div class="form-group" style="padding: 0;">
+                    <label class="form-label" style="font-size: 0.9em;">End Date</label>
+                    <input type="date" name="duration_days" class="form-input" style="color: #333;">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-outline">Continue</button>
+        </form>
 
-            {% if safe_daily_limit >= 0 %}
+        {% else %}
+        <h2 class="section-title">Dashboard</h2>
+        
+        <div class="dashboard-hero">
+            <div class="limit-circle">
+                <div class="limit-label">Today's Limit</div>
                 <div class="limit-amount {% if over_daily_limit %}text-warning{% else %}text-success{% endif %}">
-                    ${{ safe_daily_limit|floatformat:2 }}
-                </div>
-                <div class="limit-sub">
-                    per day &mdash; {{ days_remaining }} day{{ days_remaining|pluralize }} remaining
-                    (cycle ends {{ cycle.end_date }})
-                </div>
-            {% else %}
-                <div class="limit-amount overspent">Over budget!</div>
-                <div class="limit-sub">You have exceeded your total allowance for this cycle.</div>
-            {% endif %}
-        </div>
-
-        <div class="stats-row">
-            <div class="stat-box">
-                <div class="stat-label">Total Allowance</div>
-                <div class="stat-value">${{ cycle.total_allowance|floatformat:2 }}</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Spent So Far</div>
-                <div class="stat-value">${{ total_spent|floatformat:2 }}</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">Remaining</div>
-                <div class="stat-value">${{ remaining_budget|floatformat:2 }}</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title">Spending Progress</div>
-            <div class="progress-wrap">
-                <div class="progress-bg">
-                    <div class="progress-fill {% if progress_percent >= 90 %}danger{% endif %}"
-                        style="width: {{ progress_percent }}%;"></div>
-                </div>
-                <div class="progress-labels">
-                    <span>{{ progress_percent }}% spent</span>
-                    <span>{{ cycle.start_date }} &rarr; {{ cycle.end_date }}</span>
+                    {{ safe_daily_limit|floatformat:0 }} EGP
                 </div>
             </div>
+            <a href="{% url 'addExpense' %}" class="btn-outline dark">Log Expense</a>
         </div>
 
-        <div class="quick-actions">
-            <a href="{% url 'addExpense' %}" class="btn btn-primary">+ Add Expense</a>
-            <a href="{% url 'spendingInsights' %}" class="btn btn-secondary">📊 Spending Insights</a>
-            <a href="{% url 'setCycle' %}" class="btn btn-secondary">⚙ Edit Cycle</a>
+        <div style="padding: 20px; text-align: center;">
+            <p>Pie Chart Area</p> 
         </div>
 
-    </div>
+        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 30px;">
+            <a href="{% url 'dislpayExpenses' %}" class="btn-outline dark" style="margin: 0;">History</a>
+            <a href="{% url 'spendingInsights' %}" class="btn-outline dark" style="margin: 0;">Stats</a>
+            <a href="{% url 'setCycle' %}" class="btn-outline dark" style="margin: 0;">Edit Cycle</a>
+        </div>
+
+        {% endif %}
     {% endif %}
 
-{% endif %}
+    {% endblock %}
 
-{% if messages %}
+</div> {% if messages %}
     {% for message in messages %}
         {% if "Warning:" in message.tags or "Budget Exhausted" in message.message or "80%" in message.message %}
-            <script>
-                alert("{{ message }}");
-            </script>
+            <script>alert("{{ message }}");</script>
         {% endif %}
     {% endfor %}
 {% endif %}
-
-{% endblock %}
 
 </body>
 </html>

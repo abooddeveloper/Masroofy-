@@ -1,0 +1,266 @@
+/* ── Base Web Layout ── */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Modern Navbar ── */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Soft shadow underneath */
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Masroofy Logo */
+.nav-brand a {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ef4444; /* Matches your red theme */
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* Center Links */
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect on links */
+.nav-link:hover {
+    background-color: #f4f4f9;
+    color: #4caf50; /* Matches your green theme */
+}
+
+/* User Area */
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-greeting {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.05rem;
+}
+
+/* Logout / Login Buttons */
+.btn-logout, .btn-login {
+    border: 2px solid #333;
+    color: #333;
+    background: transparent;
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+}
+
+.btn-login:hover {
+    background: #4caf50;
+    border-color: #4caf50;
+    color: #fff;
+}
+
+/* Mobile Responsiveness for Navbar */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.page-wrapper {
+    max-width: 800px; /* Standard web width, centers on desktop */
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* ── Typography & Titles ── */
+.section-title {
+    color: #ef4444; /* Matches the red text in wireframes */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* ── Form Elements (Initialization Screen) ── */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    text-align: center;
+}
+
+.form-input {
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #4caf50;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border-color: #4caf50;
+    outline: none;
+}
+
+/* ── Buttons ── */
+.btn-outline {
+    border: 2px solid #4caf50;
+    background: transparent;
+    color: #4caf50;
+    padding: 10px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-outline:hover {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.btn-outline.dark {
+    border-color: #333;
+    color: #333;
+}
+
+.btn-outline.dark:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* ── Dashboard (Screen 4 & 7) ── */
+.dashboard-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+}
+
+.limit-circle {
+    width: 180px;
+    height: 180px;
+    border: 4px solid #333;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Inner circle detail from the mockup */
+.limit-circle::before {
+    content: '';
+    position: absolute;
+    width: 155px;
+    height: 155px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.limit-label {
+    font-size: 1rem;
+    color: #555;
+    z-index: 1;
+}
+
+.limit-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+.text-success { color: #4caf50; }
+.text-warning { color: #ef4444; }
+
+/* ── History Screen (Screen 6) ── */
+.history-container {
+    padding: 10px 0;
+}
+
+.history-date {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.amount-box {
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-right: 15px;
+    font-weight: bold;
+    min-width: 60px;
+    text-align: center;
+}
+
+.amount-expense { color: #ef4444; border-color: #ef4444; }
+.amount-deposit { color: #4caf50; border-color: #4caf50; }

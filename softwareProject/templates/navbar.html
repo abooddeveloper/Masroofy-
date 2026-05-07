@@ -1,25 +1,24 @@
-{% load static %}
 <nav class="navbar">
-    <a class="navbar-brand" href="{% url 'home' %}">Masroofy<span>.</span></a>
+    <div class="nav-brand">
+        <a href="{% url 'home' %}">Masroofy</a>
+    </div>
 
-    <ul class="navbar-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
+    {% if user.is_authenticated %}
+    <div class="nav-links">
+        <a href="{% url 'home' %}" class="nav-link">Dashboard</a>
+        <a href="{% url 'addExpense' %}" class="nav-link">Add Expense</a>
+        <a href="{% url 'dislpayExpenses' %}" class="nav-link">History</a>
+        <a href="{% url 'spendingInsights' %}" class="nav-link">Stats</a>
+        <a href="{% url 'category_list' %}" class="nav-link">Categories</a>
+    </div>
+    {% endif %}
+
+    <div class="nav-user">
         {% if user.is_authenticated %}
-        <li><a href="{% url 'dislpayExpenses' %}">History</a></li>
-        <li><a href="{% url 'addExpense' %}">Add Expense</a></li>
-        <li><a href="{% url 'addCategory' %}">Add Categories</a></li>
-        <li><a href="{% url 'category_list' %}">Category List</a></li>
-        <li><a href="{% url 'setCycle' %}">Budget Cycle</a></li>
-        <li><a href="{% url 'spendingInsights' %}">Insights</a></li>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
+            <span class="user-greeting">Hi, {{ user.username }} 👋</span>
+            <a href="{% url 'logout' %}" class="btn-logout">Logout</a> 
         {% else %}
-        <li><a href="{% url 'login' %}">Login</a></li>
-        <li><a href="{% url 'register' %}">Register</a></li>
+            <a href="{% url 'login' %}" class="btn-login">Login</a>
         {% endif %}
-    </ul>
-
-    <span class="navbar-welcome">
-        {% if user.is_authenticated %}Welcome, <strong>{{ user.username }}</strong>{% endif %}
-    </span>
+    </div>
 </nav>
-<hr>
