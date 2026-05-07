@@ -13,7 +13,7 @@ class Cycle(models.Model):
     is_active=models.BooleanField(default=True)
 
     def __str__(self):
-        return str(self.start_date)+'----'+ str(self.end_date)
+        return self.user.username+' '+str(self.start_date)+'----'+ str(self.end_date)
 
 
 class Category(models.Model):

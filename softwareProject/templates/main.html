@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{% static 'css/masroofy.css' %}">
 </head>
 <body>
+    
+{% include 'navbar.html' %}   <!-- النافبار هنا جوه البلوك، عشان يظهر في الصفحة الرئيسية بس -->
 
 {% block content %}
-
-{% include 'navbar.html' %}   <!-- النافبار هنا جوه البلوك، عشان يظهر في الصفحة الرئيسية بس -->
 
 {% if user.is_authenticated %}
 

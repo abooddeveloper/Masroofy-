@@ -8,8 +8,6 @@
         <li><a href="{% url 'dislpayExpenses' %}">History</a></li>
         <li><a href="{% url 'addExpense' %}">Add Expense</a></li>
         <li><a href="{% url 'addCategory' %}">Add Categories</a></li>
-        <li><a href="{% url 'edit_category' %}">Edit Category</a></li>
-        <li><a href="{% url 'delete_category' %}">Delete Category</a></li>
         <li><a href="{% url 'category_list' %}">Category List</a></li>
         <li><a href="{% url 'setCycle' %}">Budget Cycle</a></li>
         <li><a href="{% url 'spendingInsights' %}">Insights</a></li>
@@ -24,3 +22,4 @@
         {% if user.is_authenticated %}Welcome, <strong>{{ user.username }}</strong>{% endif %}
     </span>
 </nav>
+<hr>
