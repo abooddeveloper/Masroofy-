@@ -32,11 +32,38 @@ def addExpense(request):
                 try:
                     currentCycle = Cycle.objects.get(user=request.user)
                     if currentCycle.is_active:
+                        
+                        # ─── 1. THRESHOLD LOGIC (BEFORE SAVE) ─────────────────
+                        # Get total spent BEFORE this new expense is saved
+                        current_total = Expense.objects.filter(
+                            user=request.user, cycle=currentCycle
+                        ).aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
+                        
+                        # Calculate previous percentage
+                        if currentCycle.total_allowance > 0:
+                            prev_percentage = (current_total / currentCycle.total_allowance) * 100
+                        else:
+                            prev_percentage = Decimal('0.0')
+
+                        # ─── 2. SAVE THE EXPENSE ──────────────────────────────
                         exp.cycle = currentCycle
                         exp.save()
                         messages.success(request, 'expense added successfully!')
 
-                        # ─── إضافة التحذير بعد الحفظ ─────────────────
+                        # ─── 3. THRESHOLD LOGIC (AFTER SAVE) ──────────────────
+                        new_total = current_total + exp.amount
+                        if currentCycle.total_allowance > 0:
+                            new_percentage = (new_total / currentCycle.total_allowance) * 100
+                        else:
+                            new_percentage = Decimal('0.0')
+
+                        # Trigger threshold alerts (Prioritizing 100% jump)
+                        if new_percentage >= 100 and prev_percentage < 100:
+                            messages.error(request, "Budget Exhausted: You have exceeded your total allowance for this cycle!")
+                        elif new_percentage >= 80 and prev_percentage < 80:
+                            messages.warning(request, "Warning: You have used 80% of your allowance.")
+
+                        # ─── 4. EXISTING DAILY WARNING LOGIC ──────────────────
                         today = timezone.now().date()
                         today_spent = Expense.objects.filter(
                             user=request.user,
@@ -44,10 +71,7 @@ def addExpense(request):
                             time_stamp__date=today
                         ).aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
 
-                        remaining = currentCycle.total_allowance - (
-                            Expense.objects.filter(user=request.user, cycle=currentCycle)
-                            .aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
-                        )
+                        remaining = currentCycle.total_allowance - new_total
                         days_rem = max((currentCycle.end_date - today).days + 1, 1)
                         safe_limit = remaining / Decimal(days_rem)
 
@@ -63,6 +87,8 @@ def addExpense(request):
                     messages.error(request, 'there is no cycle add cycle first')
 
     return render(request, 'expenssesApp/addExpense.html', {'form': form, 'categories': allcategories})
+    
+
 
 
 # ── Existing: Add Category ───────────────────────────────────────────────────

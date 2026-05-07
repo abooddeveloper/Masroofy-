@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from register_login.models import userRegistration
+from django.contrib.auth.models import User
+from datetime import date
 # Ceate your models here.
 
 
@@ -43,3 +45,4 @@ class Expense(models.Model):
 
     def __str__(self):
         return str(self.time_stamp)+"--"+self.category.name
+

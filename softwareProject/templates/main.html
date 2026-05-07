@@ -52,7 +52,9 @@
             </div>
 
             {% if safe_daily_limit >= 0 %}
-                <div class="limit-amount">${{ safe_daily_limit|floatformat:2 }}</div>
+                <div class="limit-amount {% if over_daily_limit %}text-warning{% else %}text-success{% endif %}">
+                    ${{ safe_daily_limit|floatformat:2 }}
+                </div>
                 <div class="limit-sub">
                     per day &mdash; {{ days_remaining }} day{{ days_remaining|pluralize }} remaining
                     (cycle ends {{ cycle.end_date }})
@@ -101,6 +103,16 @@
     </div>
     {% endif %}
 
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if "Warning:" in message.tags or "Budget Exhausted" in message.message or "80%" in message.message %}
+            <script>
+                alert("{{ message }}");
+            </script>
+        {% endif %}
+    {% endfor %}
 {% endif %}
 
 {% endblock %}
