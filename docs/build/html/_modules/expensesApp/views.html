@@ -1,0 +1,738 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>expensesApp.views &mdash; Masroofy 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Masroofy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">django project documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../softwareProject.html">softwareProject package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../expensesApp.html">expensesApp package</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search.html">Search Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Masroofy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">expensesApp.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for expensesApp.views</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Expenses App Views Module.</span>
+
+<span class="sd">This module contains all view functions for the expense tracking application,</span>
+<span class="sd">including expense management, category operations, budget cycle setup,</span>
+<span class="sd">and spending analytics.</span>
+
+<span class="sd">All views are protected by @login_required decorator, ensuring only</span>
+<span class="sd">authenticated users can access expense tracking functionality.</span>
+
+<span class="sd">Views Included:</span>
+<span class="sd">    - addExpense: Handle expense creation with budget validation</span>
+<span class="sd">    - addCategory: Create new expense categories</span>
+<span class="sd">    - displayAllexpenses: Show all user expenses</span>
+<span class="sd">    - setCycle: Initialize or update budget cycle</span>
+<span class="sd">    - spendingInsights: Generate spending analytics and charts</span>
+<span class="sd">    - category_list: Display all user categories</span>
+<span class="sd">    - edit_category: Modify existing categories</span>
+<span class="sd">    - delete_category: Remove categories and associated expenses</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.froms</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExpenseForm</span><span class="p">,</span> <span class="n">categoryForm</span><span class="p">,</span> <span class="n">CycleForm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Category</span><span class="p">,</span> <span class="n">Cycle</span><span class="p">,</span> <span class="n">Expense</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib</span><span class="w"> </span><span class="kn">import</span> <span class="n">messages</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sum</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># EXPENSE MANAGEMENT VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<div class="viewcode-block" id="addExpense">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.addExpense">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addExpense</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle expense creation with comprehensive budget validation.</span>
+<span class="sd">    </span>
+<span class="sd">    This view processes expense form submissions, validates against the user&#39;s</span>
+<span class="sd">    active budget cycle, and provides real-time warnings for:</span>
+<span class="sd">        - Budget threshold alerts (80% and 100% usage)</span>
+<span class="sd">        - Daily safe spending limit violations</span>
+<span class="sd">    </span>
+<span class="sd">    Features:</span>
+<span class="sd">        - Pre-save validation and checks</span>
+<span class="sd">        - Budget percentage calculations (before and after save)</span>
+<span class="sd">        - Threshold alerts for budget milestones</span>
+<span class="sd">        - Daily spending limit warnings</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object containing POST data with expense amount</span>
+<span class="sd">                 and selected category</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered addExpense.html template with form and categories context</span>
+<span class="sd">        </span>
+<span class="sd">    Alert Conditions:</span>
+<span class="sd">        - 100% Budget: Error message when budget is exhausted</span>
+<span class="sd">        - 80% Budget: Warning message when nearing limit</span>
+<span class="sd">        - Daily Limit: Warning when daily spending exceeds safe limit</span>
+<span class="sd">        </span>
+<span class="sd">    Process Flow:</span>
+<span class="sd">        1. GET: Display empty expense form with user&#39;s categories</span>
+<span class="sd">        2. POST: Process expense submission</span>
+<span class="sd">           a. Validate form and category existence</span>
+<span class="sd">           b. Check for active budget cycle</span>
+<span class="sd">           c. Calculate pre-save budget percentage</span>
+<span class="sd">           d. Save expense</span>
+<span class="sd">           e. Calculate post-save budget percentage</span>
+<span class="sd">           f. Trigger alerts based on thresholds</span>
+<span class="sd">           g. Check daily spending limit</span>
+<span class="sd">           h. Display appropriate success/error messages</span>
+<span class="sd">        </span>
+<span class="sd">    Example:</span>
+<span class="sd">        POST request with:</span>
+<span class="sd">            amount: 50.00</span>
+<span class="sd">            categories: Food</span>
+<span class="sd">        Result: Expense saved, budget alerts shown if thresholds crossed</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">ExpenseForm</span><span class="p">()</span>
+    <span class="n">allcategories</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">ExpenseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;categories&quot;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="n">exp</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">exp</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+
+                <span class="c1"># Validate category existence</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">categ</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">category</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+                    <span class="n">exp</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">categ</span>
+                <span class="k">except</span> <span class="n">Category</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;such category doesnot exist add it to complete the process&#39;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/addExpense.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span> <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">allcategories</span><span class="p">})</span>
+
+                <span class="c1"># Validate active budget cycle</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">currentCycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+                    
+                    <span class="k">if</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">is_active</span><span class="p">:</span>
+                        
+                        <span class="c1"># ─── 1. THRESHOLD LOGIC (BEFORE SAVE) ─────────────────</span>
+                        <span class="c1"># Calculate total spent BEFORE this new expense</span>
+                        <span class="n">current_total</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                            <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">currentCycle</span>
+                        <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+                        
+                        <span class="c1"># Calculate previous budget usage percentage</span>
+                        <span class="k">if</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">prev_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">current_total</span> <span class="o">/</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">total_allowance</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">prev_percentage</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+
+                        <span class="c1"># ─── 2. SAVE THE EXPENSE ──────────────────────────────</span>
+                        <span class="n">exp</span><span class="o">.</span><span class="n">cycle</span> <span class="o">=</span> <span class="n">currentCycle</span>
+                        <span class="n">exp</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                        <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expense added successfully!&#39;</span><span class="p">)</span>
+
+                        <span class="c1"># ─── 3. THRESHOLD LOGIC (AFTER SAVE) ──────────────────</span>
+                        <span class="n">new_total</span> <span class="o">=</span> <span class="n">current_total</span> <span class="o">+</span> <span class="n">exp</span><span class="o">.</span><span class="n">amount</span>
+                        <span class="k">if</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">new_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_total</span> <span class="o">/</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">total_allowance</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">new_percentage</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+
+                        <span class="c1"># Trigger threshold alerts (prioritizing 100% over 80%)</span>
+                        <span class="k">if</span> <span class="n">new_percentage</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">prev_percentage</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Budget Exhausted: You have exceeded your total allowance for this cycle!&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">new_percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="ow">and</span> <span class="n">prev_percentage</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+                            <span class="n">messages</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Warning: You have used 80</span><span class="si">% o</span><span class="s2">f your allowance.&quot;</span><span class="p">)</span>
+
+                        <span class="c1"># ─── 4. DAILY SPENDING LIMIT WARNING ──────────────────</span>
+                        <span class="n">today</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+                        <span class="n">today_spent</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                            <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                            <span class="n">cycle</span><span class="o">=</span><span class="n">currentCycle</span><span class="p">,</span>
+                            <span class="n">time_stamp__date</span><span class="o">=</span><span class="n">today</span>
+                        <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+
+                        <span class="n">remaining</span> <span class="o">=</span> <span class="n">currentCycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">-</span> <span class="n">new_total</span>
+                        <span class="n">days_rem</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">currentCycle</span><span class="o">.</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">today</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                        <span class="n">safe_limit</span> <span class="o">=</span> <span class="n">remaining</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">days_rem</span><span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">today_spent</span> <span class="o">&gt;</span> <span class="n">safe_limit</span><span class="p">:</span>
+                            <span class="n">messages</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                                <span class="n">request</span><span class="p">,</span>
+                                <span class="sa">f</span><span class="s1">&#39;⚠️ You exceed the daily safe limit! You have spent $</span><span class="si">{</span><span class="n">today_spent</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> &#39;</span>
+                                <span class="sa">f</span><span class="s1">&#39;while your safe limit is $</span><span class="si">{</span><span class="n">safe_limit</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+                            <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;cycle is not active&quot;</span><span class="p">)</span>
+                        
+                <span class="k">except</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;there is no cycle add cycle first&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/addExpense.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span> <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">allcategories</span><span class="p">})</span></div>
+
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># CATEGORY MANAGEMENT VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<div class="viewcode-block" id="addCategory">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.addCategory">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">addCategory</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a new expense category for the authenticated user.</span>
+<span class="sd">    </span>
+<span class="sd">    Allows users to define custom categories for organizing their expenses.</span>
+<span class="sd">    Each category is user-specific and includes an optional icon image.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object containing POST data with category name</span>
+<span class="sd">                 and optional icon file upload</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered addCategory.html template with category form</span>
+<span class="sd">        </span>
+<span class="sd">    Process:</span>
+<span class="sd">        GET: Display empty category form</span>
+<span class="sd">        POST: Process category creation</span>
+<span class="sd">            - Validate form data</span>
+<span class="sd">            - Assign user to category</span>
+<span class="sd">            - Save to database</span>
+<span class="sd">            - Display success/error messages</span>
+<span class="sd">    </span>
+<span class="sd">    Validation:</span>
+<span class="sd">        - Category name must be unique per user</span>
+<span class="sd">        - Name cannot be empty</span>
+<span class="sd">        - Icon file must be valid image format</span>
+<span class="sd">    </span>
+<span class="sd">    Messages:</span>
+<span class="sd">        Success: &#39;category added successfully!&#39;</span>
+<span class="sd">        Error: &#39;category already exist&#39; (if duplicate name)</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        POST request with:</span>
+<span class="sd">            name: &quot;Transportation&quot;</span>
+<span class="sd">            icon: bus.png (optional)</span>
+<span class="sd">        Result: New category created for the user</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">categoryForm</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+            <span class="n">form</span> <span class="o">=</span> <span class="n">categoryForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">obj</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="n">obj</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+                    <span class="n">obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;category added successfully!&#39;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;category already exist&#39;</span><span class="p">)</span>
+                    
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/addCategory.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="category_list">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.category_list">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">category_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display all categories belonging to the authenticated user.</span>
+<span class="sd">    </span>
+<span class="sd">    Retrieves and displays alphabetically ordered list of user&#39;s</span>
+<span class="sd">    expense categories for management purposes.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object from authenticated user</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered category_list.html template with categories context</span>
+<span class="sd">        </span>
+<span class="sd">    Context Variables:</span>
+<span class="sd">        categories: QuerySet of Category objects ordered alphabetically by name</span>
+<span class="sd">    </span>
+<span class="sd">    Template Usage:</span>
+<span class="sd">        {% for category in categories %}</span>
+<span class="sd">            {{ category.name }}</span>
+<span class="sd">            &lt;img src=&quot;{{ category.icon.url }}&quot;&gt;</span>
+<span class="sd">            &lt;a href=&quot;{% url &#39;edit_category&#39; category.id %}&quot;&gt;Edit&lt;/a&gt;</span>
+<span class="sd">            &lt;a href=&quot;{% url &#39;delete_category&#39; category.id %}&quot;&gt;Delete&lt;/a&gt;</span>
+<span class="sd">        {% endfor %}</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        GET /categories/ → Displays all user categories in alphabetical order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/category_list.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="n">categories</span>
+    <span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="edit_category">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.edit_category">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">edit_category</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Edit an existing expense category.</span>
+<span class="sd">    </span>
+<span class="sd">    Allows users to modify category name and/or icon image.</span>
+<span class="sd">    Ensures the category belongs to the requesting user for security.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object containing POST data for updates</span>
+<span class="sd">        category_id: Primary key of the category to edit (from URL)</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        GET: Rendered edit_category.html with pre-filled form</span>
+<span class="sd">        POST (success): Redirect to category_list with success message</span>
+<span class="sd">        POST (invalid): Re-render form with error messages</span>
+<span class="sd">        </span>
+<span class="sd">    Security:</span>
+<span class="sd">        - Verifies category belongs to current user</span>
+<span class="sd">        - Prevents editing other users&#39; categories</span>
+<span class="sd">        </span>
+<span class="sd">    Messages:</span>
+<span class="sd">        Success: &#39;Category &quot;{name}&quot; updated successfully!&#39;</span>
+<span class="sd">        Error: &#39;Please correct the errors below&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        POST /categories/edit/5/ with:</span>
+<span class="sd">            name: &quot;Groceries&quot; (updated from &quot;Food&quot;)</span>
+<span class="sd">            icon: new_icon.png</span>
+<span class="sd">        Result: Category updated and user redirected to category list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">category_id</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">categoryForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">category</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Category &quot;</span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&quot; updated successfully!&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;category_list&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messages</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Please correct the errors below&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">categoryForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">category</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/edit_category.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span>
+        <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">category</span>
+    <span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="delete_category">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.delete_category">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_category</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">category_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete an existing expense category.</span>
+<span class="sd">    </span>
+<span class="sd">    Removes a category from the user&#39;s account. </span>
+<span class="sd">    ⚠️ WARNING: All expenses associated with this category will also be deleted</span>
+<span class="sd">    due to CASCADE relationship in the database model.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object (POST confirms deletion)</span>
+<span class="sd">        category_id: Primary key of the category to delete (from URL)</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        GET: Rendered delete_category.html with confirmation prompt</span>
+<span class="sd">        POST: Redirect to category_list with success message after deletion</span>
+<span class="sd">        </span>
+<span class="sd">    Security:</span>
+<span class="sd">        - Verifies category belongs to current user</span>
+<span class="sd">        - Requires POST confirmation for deletion</span>
+<span class="sd">        </span>
+<span class="sd">    Messages:</span>
+<span class="sd">        Success: &#39;Category &quot;{name}&quot; deleted successfully!&#39;</span>
+<span class="sd">        </span>
+<span class="sd">    Warning:</span>
+<span class="sd">        Uses CASCADE delete - all expenses in this category will be removed!</span>
+<span class="sd">        The confirmation page should display this warning to users.</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        POST /categories/delete/5/ </span>
+<span class="sd">        Deletes category with id=5 and all related expenses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">category_id</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="n">category_name</span> <span class="o">=</span> <span class="n">category</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">category</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Category &quot;</span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s1">&quot; deleted successfully!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;category_list&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/delete_category.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">category</span><span class="p">})</span></div>
+
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># EXPENSE DISPLAY VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<div class="viewcode-block" id="displayAllexpenses">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.displayAllexpenses">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">displayAllexpenses</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display all expenses for the authenticated user.</span>
+<span class="sd">    </span>
+<span class="sd">    Retrieves and displays a complete list of expenses belonging to</span>
+<span class="sd">    the current user, ordered by timestamp (newest first by model Meta).</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object from authenticated user</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered Expenses.html template with all user expenses in context</span>
+<span class="sd">        </span>
+<span class="sd">    Context Variables:</span>
+<span class="sd">        expenses: QuerySet of Expense objects for the current user</span>
+<span class="sd">                  Ordered by time_stamp descending (newest first)</span>
+<span class="sd">    </span>
+<span class="sd">    Template Usage:</span>
+<span class="sd">        {% for expense in expenses %}</span>
+<span class="sd">            {{ expense.time_stamp }} - {{ expense.category.name }}: ${{ expense.amount }}</span>
+<span class="sd">        {% endfor %}</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        GET /showAllexpenses/ → Displays all user expenses in reverse chronological order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">allExpenses</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/Expenses.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;expenses&#39;</span><span class="p">:</span> <span class="n">allExpenses</span><span class="p">})</span></div>
+
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># BUDGET CYCLE MANAGEMENT VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<div class="viewcode-block" id="setCycle">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.setCycle">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">setCycle</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create or update user&#39;s budget spending cycle (User Story 1).</span>
+<span class="sd">    </span>
+<span class="sd">    Allows students to input their total cash allowance and cycle duration.</span>
+<span class="sd">    Automatically calculates start date, end date, and displays current daily</span>
+<span class="sd">    spending limit based on remaining budget.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object containing POST data with:</span>
+<span class="sd">            total_allowance: Total budget for the cycle (min $0.01)</span>
+<span class="sd">            duration_days: Number of days the cycle should last (1-365)</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered setCycle.html template with:</span>
+<span class="sd">            form: CycleForm for user input</span>
+<span class="sd">            existing_cycle: Current cycle if exists (for display)</span>
+<span class="sd">            preview_daily_limit: Calculated safe daily spending amount</span>
+<span class="sd">        </span>
+<span class="sd">    Process:</span>
+<span class="sd">        GET Request:</span>
+<span class="sd">            1. Check for existing cycle</span>
+<span class="sd">            2. Pre-fill form if cycle exists</span>
+<span class="sd">            3. Calculate preview daily limit</span>
+<span class="sd">            4. Display form with current/pre-filled values</span>
+<span class="sd">            </span>
+<span class="sd">        POST Request:</span>
+<span class="sd">            1. Validate form data</span>
+<span class="sd">            2. Calculate start_date = today</span>
+<span class="sd">            3. Calculate end_date = start_date + duration_days - 1</span>
+<span class="sd">            4. Create new cycle OR update existing</span>
+<span class="sd">            5. Set is_active = True (deactivates any previous cycle)</span>
+<span class="sd">            6. Redirect to home page with success message</span>
+<span class="sd">    </span>
+<span class="sd">    Formula:</span>
+<span class="sd">        start_date = current date</span>
+<span class="sd">        end_date = start_date + duration_days - 1</span>
+<span class="sd">        days_remaining = max((end_date - today).days + 1, 1)</span>
+<span class="sd">        remaining_budget = total_allowance - total_spent</span>
+<span class="sd">        daily_safe_limit = remaining_budget / days_remaining</span>
+<span class="sd">    </span>
+<span class="sd">    Example:</span>
+<span class="sd">        POST request with:</span>
+<span class="sd">            total_allowance: 1000.00</span>
+<span class="sd">            duration_days: 30</span>
+<span class="sd">        Creates cycle: Jan 1 - Jan 30 with $1000 budget</span>
+<span class="sd">        </span>
+<span class="sd">    Note:</span>
+<span class="sd">        First-time users are redirected here after registration</span>
+<span class="sd">        due to is_first_login flag in user model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">existing_cycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CycleForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">total_allowance</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;total_allowance&#39;</span><span class="p">]</span>
+            <span class="n">duration_days</span>   <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;duration_days&#39;</span><span class="p">]</span>
+
+            <span class="n">start_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+            <span class="n">end_date</span>   <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">duration_days</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">existing_cycle</span><span class="p">:</span>
+                <span class="c1"># Update existing cycle</span>
+                <span class="n">existing_cycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">=</span> <span class="n">total_allowance</span>
+                <span class="n">existing_cycle</span><span class="o">.</span><span class="n">start_date</span>      <span class="o">=</span> <span class="n">start_date</span>
+                <span class="n">existing_cycle</span><span class="o">.</span><span class="n">end_date</span>        <span class="o">=</span> <span class="n">end_date</span>
+                <span class="n">existing_cycle</span><span class="o">.</span><span class="n">is_active</span>       <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">existing_cycle</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Budget cycle updated successfully!&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Create new cycle</span>
+                <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                    <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                    <span class="n">total_allowance</span><span class="o">=</span><span class="n">total_allowance</span><span class="p">,</span>
+                    <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+                    <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+                    <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;Budget cycle created successfully!&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Pre-fill the form if a cycle already exists</span>
+        <span class="n">initial</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">existing_cycle</span><span class="p">:</span>
+            <span class="n">days</span> <span class="o">=</span> <span class="p">(</span><span class="n">existing_cycle</span><span class="o">.</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">existing_cycle</span><span class="o">.</span><span class="n">start_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">initial</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;total_allowance&#39;</span><span class="p">:</span> <span class="n">existing_cycle</span><span class="o">.</span><span class="n">total_allowance</span><span class="p">,</span>
+                <span class="s1">&#39;duration_days&#39;</span><span class="p">:</span>   <span class="n">days</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CycleForm</span><span class="p">(</span><span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">)</span>
+
+    <span class="c1"># Compute current daily limit to show on the page (server-side only)</span>
+    <span class="n">preview_daily_limit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">existing_cycle</span><span class="p">:</span>
+        <span class="n">days_remaining</span> <span class="o">=</span> <span class="p">(</span><span class="n">existing_cycle</span><span class="o">.</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">())</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">days_remaining</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">total_spent</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+                <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">existing_cycle</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+            <span class="n">remaining</span>  <span class="o">=</span> <span class="n">existing_cycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">-</span> <span class="n">total_spent</span>
+            <span class="n">preview_daily_limit</span> <span class="o">=</span> <span class="n">remaining</span> <span class="o">/</span> <span class="n">days_remaining</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/setCycle.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;form&#39;</span><span class="p">:</span>                <span class="n">form</span><span class="p">,</span>
+        <span class="s1">&#39;existing_cycle&#39;</span><span class="p">:</span>      <span class="n">existing_cycle</span><span class="p">,</span>
+        <span class="s1">&#39;preview_daily_limit&#39;</span><span class="p">:</span> <span class="n">preview_daily_limit</span><span class="p">,</span>
+    <span class="p">})</span></div>
+
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># ANALYTICS VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<div class="viewcode-block" id="spendingInsights">
+<a class="viewcode-back" href="../../expensesApp.html#expensesApp.views.spendingInsights">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">spendingInsights</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate visual spending breakdown for user&#39;s active budget cycle (User Story 3).</span>
+<span class="sd">    </span>
+<span class="sd">    Creates a server-side computed horizontal bar chart showing expenses</span>
+<span class="sd">    grouped by category with percentages. Uses pure CSS for visualization</span>
+<span class="sd">    with no JavaScript required.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object from authenticated user</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered spendingInsights.html template with:</span>
+<span class="sd">            cycle: Active budget cycle</span>
+<span class="sd">            total_spent: Sum of all expenses in current cycle</span>
+<span class="sd">            category_rows: List of category spending breakdowns</span>
+<span class="sd">            </span>
+<span class="sd">    Category Row Structure:</span>
+<span class="sd">        - name: Category name (string)</span>
+<span class="sd">        - amount: Total spent in category (Decimal)</span>
+<span class="sd">        - percentage: Percentage of total budget (float)</span>
+<span class="sd">        - color: Assigned color for visualization (hex code)</span>
+<span class="sd">    </span>
+<span class="sd">    Process:</span>
+<span class="sd">        1. Retrieve active cycle for current user</span>
+<span class="sd">        2. Calculate total spent across all categories</span>
+<span class="sd">        3. Group expenses by category using values() and annotate()</span>
+<span class="sd">        4. Sum amounts per category</span>
+<span class="sd">        5. Order by highest spending first</span>
+<span class="sd">        6. Calculate percentage for each category</span>
+<span class="sd">        7. Assign distinct colors from predefined palette</span>
+<span class="sd">        8. Prepare data for CSS bar chart rendering</span>
+<span class="sd">    </span>
+<span class="sd">    Color Palette (10 colors):</span>
+<span class="sd">        indigo, amber, emerald, red, blue, purple, pink, teal, orange, lime</span>
+<span class="sd">    </span>
+<span class="sd">    Example Output:</span>
+<span class="sd">        category_rows = [</span>
+<span class="sd">            {&#39;name&#39;: &#39;Food&#39;, &#39;amount&#39;: 350.00, &#39;percentage&#39;: 35.0, &#39;color&#39;: &#39;#6366f1&#39;},</span>
+<span class="sd">            {&#39;name&#39;: &#39;Transport&#39;, &#39;amount&#39;: 150.00, &#39;percentage&#39;: 15.0, &#39;color&#39;: &#39;#f59e0b&#39;},</span>
+<span class="sd">            {&#39;name&#39;: &#39;Entertainment&#39;, &#39;amount&#39;: 100.00, &#39;percentage&#39;: 10.0, &#39;color&#39;: &#39;#10b981&#39;}</span>
+<span class="sd">        ]</span>
+<span class="sd">    </span>
+<span class="sd">    Note:</span>
+<span class="sd">        All calculations are server-side to ensure data accuracy</span>
+<span class="sd">        and prevent manipulation. Charts render without external</span>
+<span class="sd">        JavaScript libraries for improved performance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="n">chart_labels</span>  <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chart_data</span>    <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chart_colors</span>  <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">total_spent</span>   <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+    <span class="n">category_rows</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Color palette for category visualization</span>
+    <span class="n">COLORS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;#6366f1&#39;</span><span class="p">,</span> <span class="s1">&#39;#f59e0b&#39;</span><span class="p">,</span> <span class="s1">&#39;#10b981&#39;</span><span class="p">,</span> <span class="s1">&#39;#ef4444&#39;</span><span class="p">,</span> <span class="s1">&#39;#3b82f6&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;#8b5cf6&#39;</span><span class="p">,</span> <span class="s1">&#39;#ec4899&#39;</span><span class="p">,</span> <span class="s1">&#39;#14b8a6&#39;</span><span class="p">,</span> <span class="s1">&#39;#f97316&#39;</span><span class="p">,</span> <span class="s1">&#39;#84cc16&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">cycle</span><span class="p">:</span>
+        <span class="c1"># Calculate total spending</span>
+        <span class="n">total_spent</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span>
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Group expenses by category with sum</span>
+        <span class="n">expenses_by_category</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span>
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;category__name&#39;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-total&#39;</span><span class="p">)</span>  <span class="c1"># Largest category first</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Build category data for template</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">expenses_by_category</span><span class="p">):</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="n">COLORS</span><span class="p">[</span><span class="n">idx</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">COLORS</span><span class="p">)]</span>  <span class="c1"># Cycle through colors</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span>
+            <span class="n">percentage</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">amount</span> <span class="o">/</span> <span class="n">total_spent</span> <span class="o">*</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">total_spent</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+            <span class="n">chart_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;category__name&#39;</span><span class="p">])</span>
+            <span class="n">chart_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">amount</span><span class="p">))</span>
+            <span class="n">chart_colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">category_rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span>       <span class="n">row</span><span class="p">[</span><span class="s1">&#39;category__name&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;amount&#39;</span><span class="p">:</span>     <span class="n">amount</span><span class="p">,</span>
+                <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="n">percentage</span><span class="p">,</span>
+                <span class="s1">&#39;color&#39;</span><span class="p">:</span>      <span class="n">color</span><span class="p">,</span>
+            <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expenssesApp/spendingInsights.html&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">&#39;cycle&#39;</span><span class="p">:</span>         <span class="n">cycle</span><span class="p">,</span>
+        <span class="s1">&#39;total_spent&#39;</span><span class="p">:</span>   <span class="n">total_spent</span><span class="p">,</span>
+        <span class="s1">&#39;category_rows&#39;</span><span class="p">:</span> <span class="n">category_rows</span><span class="p">,</span>
+    <span class="p">})</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Abdelrahman Mohamed Abdelrahman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

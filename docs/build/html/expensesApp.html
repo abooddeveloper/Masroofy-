@@ -1,0 +1,1902 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>expensesApp package &mdash; Masroofy 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="expensesApp.migrations package" href="expensesApp.migrations.html" />
+    <link rel="prev" title="django project documentation" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Masroofy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">django project documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">expensesApp package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html">expensesApp.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.admin">expensesApp.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.apps">expensesApp.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.apps.ExpensesappConfig"><code class="docutils literal notranslate"><span class="pre">ExpensesappConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.froms">expensesApp.froms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm"><code class="docutils literal notranslate"><span class="pre">categoryForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm"><code class="docutils literal notranslate"><span class="pre">ExpenseForm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm"><code class="docutils literal notranslate"><span class="pre">CycleForm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.models">expensesApp.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle"><code class="docutils literal notranslate"><span class="pre">Cycle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense"><code class="docutils literal notranslate"><span class="pre">Expense</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.tests">expensesApp.tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.urls">expensesApp.urls module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.urls.urlpatterns"><code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp.views">expensesApp.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.addExpense"><code class="docutils literal notranslate"><span class="pre">addExpense()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.addCategory"><code class="docutils literal notranslate"><span class="pre">addCategory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.category_list"><code class="docutils literal notranslate"><span class="pre">category_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.edit_category"><code class="docutils literal notranslate"><span class="pre">edit_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.delete_category"><code class="docutils literal notranslate"><span class="pre">delete_category()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.displayAllexpenses"><code class="docutils literal notranslate"><span class="pre">displayAllexpenses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.setCycle"><code class="docutils literal notranslate"><span class="pre">setCycle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.views.spendingInsights"><code class="docutils literal notranslate"><span class="pre">spendingInsights()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-expensesApp">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="softwareProject.html">softwareProject package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="softwareProject.html">softwareProject package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">expensesApp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expensesApp.migrations.html">expensesApp.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.admin">expensesApp.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.apps">expensesApp.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.apps.ExpensesappConfig"><code class="docutils literal notranslate"><span class="pre">ExpensesappConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.apps.ExpensesappConfig.name"><code class="docutils literal notranslate"><span class="pre">ExpensesappConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.froms">expensesApp.froms module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.froms.categoryForm"><code class="docutils literal notranslate"><span class="pre">categoryForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm.Meta"><code class="docutils literal notranslate"><span class="pre">categoryForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm._meta"><code class="docutils literal notranslate"><span class="pre">categoryForm._meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm.base_fields"><code class="docutils literal notranslate"><span class="pre">categoryForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">categoryForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.categoryForm.media"><code class="docutils literal notranslate"><span class="pre">categoryForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.froms.ExpenseForm"><code class="docutils literal notranslate"><span class="pre">ExpenseForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm.Meta"><code class="docutils literal notranslate"><span class="pre">ExpenseForm.Meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm._meta"><code class="docutils literal notranslate"><span class="pre">ExpenseForm._meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm.base_fields"><code class="docutils literal notranslate"><span class="pre">ExpenseForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">ExpenseForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.ExpenseForm.media"><code class="docutils literal notranslate"><span class="pre">ExpenseForm.media</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.froms.CycleForm"><code class="docutils literal notranslate"><span class="pre">CycleForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm.total_allowance"><code class="docutils literal notranslate"><span class="pre">CycleForm.total_allowance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm.base_fields"><code class="docutils literal notranslate"><span class="pre">CycleForm.base_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm.declared_fields"><code class="docutils literal notranslate"><span class="pre">CycleForm.declared_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm.media"><code class="docutils literal notranslate"><span class="pre">CycleForm.media</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.froms.CycleForm.duration_days"><code class="docutils literal notranslate"><span class="pre">CycleForm.duration_days</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.models">expensesApp.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.models.Cycle"><code class="docutils literal notranslate"><span class="pre">Cycle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.user"><code class="docutils literal notranslate"><span class="pre">Cycle.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.start_date"><code class="docutils literal notranslate"><span class="pre">Cycle.start_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.end_date"><code class="docutils literal notranslate"><span class="pre">Cycle.end_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.total_allowance"><code class="docutils literal notranslate"><span class="pre">Cycle.total_allowance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.is_active"><code class="docutils literal notranslate"><span class="pre">Cycle.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">Cycle.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">Cycle.start_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">Cycle.end_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">Cycle.total_allowance</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">Cycle.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Cycle.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Cycle.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.NotUpdated"><code class="docutils literal notranslate"><span class="pre">Cycle.NotUpdated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle._meta"><code class="docutils literal notranslate"><span class="pre">Cycle._meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.expense_set"><code class="docutils literal notranslate"><span class="pre">Cycle.expense_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.get_next_by_end_date"><code class="docutils literal notranslate"><span class="pre">Cycle.get_next_by_end_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.get_next_by_start_date"><code class="docutils literal notranslate"><span class="pre">Cycle.get_next_by_start_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.get_previous_by_end_date"><code class="docutils literal notranslate"><span class="pre">Cycle.get_previous_by_end_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.get_previous_by_start_date"><code class="docutils literal notranslate"><span class="pre">Cycle.get_previous_by_start_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.id"><code class="docutils literal notranslate"><span class="pre">Cycle.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.objects"><code class="docutils literal notranslate"><span class="pre">Cycle.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Cycle.user_id"><code class="docutils literal notranslate"><span class="pre">Cycle.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.models.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.user"><code class="docutils literal notranslate"><span class="pre">Category.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.name"><code class="docutils literal notranslate"><span class="pre">Category.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.icon"><code class="docutils literal notranslate"><span class="pre">Category.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">Category.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">Category.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">Category.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Category.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Category.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.NotUpdated"><code class="docutils literal notranslate"><span class="pre">Category.NotUpdated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category._meta"><code class="docutils literal notranslate"><span class="pre">Category._meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.expense_set"><code class="docutils literal notranslate"><span class="pre">Category.expense_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.id"><code class="docutils literal notranslate"><span class="pre">Category.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.objects"><code class="docutils literal notranslate"><span class="pre">Category.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Category.user_id"><code class="docutils literal notranslate"><span class="pre">Category.user_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.models.Expense"><code class="docutils literal notranslate"><span class="pre">Expense</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.user"><code class="docutils literal notranslate"><span class="pre">Expense.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.cycle"><code class="docutils literal notranslate"><span class="pre">Expense.cycle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.category"><code class="docutils literal notranslate"><span class="pre">Expense.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.amount"><code class="docutils literal notranslate"><span class="pre">Expense.amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.time_stamp"><code class="docutils literal notranslate"><span class="pre">Expense.time_stamp</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">Expense.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">Expense.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.NotUpdated"><code class="docutils literal notranslate"><span class="pre">Expense.NotUpdated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense._meta"><code class="docutils literal notranslate"><span class="pre">Expense._meta</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.category_id"><code class="docutils literal notranslate"><span class="pre">Expense.category_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.cycle_id"><code class="docutils literal notranslate"><span class="pre">Expense.cycle_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.get_next_by_time_stamp"><code class="docutils literal notranslate"><span class="pre">Expense.get_next_by_time_stamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.get_previous_by_time_stamp"><code class="docutils literal notranslate"><span class="pre">Expense.get_previous_by_time_stamp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.id"><code class="docutils literal notranslate"><span class="pre">Expense.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.objects"><code class="docutils literal notranslate"><span class="pre">Expense.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#expensesApp.models.Expense.user_id"><code class="docutils literal notranslate"><span class="pre">Expense.user_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">Expense.user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">Expense.cycle</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">Expense.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">Expense.amount</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">Expense.time_stamp</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.tests">expensesApp.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.urls">expensesApp.urls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.urls.urlpatterns"><code class="docutils literal notranslate"><span class="pre">urlpatterns</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp.views">expensesApp.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.addExpense"><code class="docutils literal notranslate"><span class="pre">addExpense()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.addCategory"><code class="docutils literal notranslate"><span class="pre">addCategory()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.category_list"><code class="docutils literal notranslate"><span class="pre">category_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.edit_category"><code class="docutils literal notranslate"><span class="pre">edit_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.delete_category"><code class="docutils literal notranslate"><span class="pre">delete_category()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.displayAllexpenses"><code class="docutils literal notranslate"><span class="pre">displayAllexpenses()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.setCycle"><code class="docutils literal notranslate"><span class="pre">setCycle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expensesApp.views.spendingInsights"><code class="docutils literal notranslate"><span class="pre">spendingInsights()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-expensesApp">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">Search Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Masroofy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">django project documentation</a></li>
+      <li class="breadcrumb-item active">expensesApp package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/expensesApp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="expensesapp-package">
+<h1>expensesApp package<a class="headerlink" href="#expensesapp-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="expensesApp.migrations.html">expensesApp.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#module-expensesApp.migrations.0001_initial">expensesApp.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#module-expensesApp.migrations.0002_alter_category_icon">expensesApp.migrations.0002_alter_category_icon module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0002_alter_category_icon.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0002_alter_category_icon.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0002_alter_category_icon.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#module-expensesApp.migrations.0003_alter_category_icon">expensesApp.migrations.0003_alter_category_icon module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0003_alter_category_icon.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0003_alter_category_icon.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0003_alter_category_icon.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#module-expensesApp.migrations.0004_alter_category_icon">expensesApp.migrations.0004_alter_category_icon module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0004_alter_category_icon.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0004_alter_category_icon.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="expensesApp.migrations.html#expensesApp.migrations.0004_alter_category_icon.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.migrations.html#module-expensesApp.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-expensesApp.admin">
+<span id="expensesapp-admin-module"></span><h2>expensesApp.admin module<a class="headerlink" href="#module-expensesApp.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-expensesApp.apps">
+<span id="expensesapp-apps-module"></span><h2>expensesApp.apps module<a class="headerlink" href="#module-expensesApp.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.apps.ExpensesappConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.apps.</span></span><span class="sig-name descname"><span class="pre">ExpensesappConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/apps.html#ExpensesappConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.apps.ExpensesappConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.apps.ExpensesappConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'expensesApp'</span></span><a class="headerlink" href="#expensesApp.apps.ExpensesappConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expensesApp.froms">
+<span id="expensesapp-froms-module"></span><h2>expensesApp.froms module<a class="headerlink" href="#module-expensesApp.froms" title="Link to this heading"></a></h2>
+<p>Django Forms Module for Expense Tracking Application.</p>
+<p>This module contains all form classes used for data input and validation
+in the expense tracking system.</p>
+<dl class="simple">
+<dt>Forms Included:</dt><dd><ul class="simple">
+<li><p>categoryForm: ModelForm for creating/editing expense categories</p></li>
+<li><p>ExpenseForm: ModelForm for recording expense amounts</p></li>
+<li><p>CycleForm: Standard Form for budget cycle configuration</p></li>
+</ul>
+</dd>
+</dl>
+<p>Each form handles specific validation rules and user input processing
+for different parts of the application.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.froms.</span></span><span class="sig-name descname"><span class="pre">categoryForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/froms.html#categoryForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.froms.categoryForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<p>Form for creating and editing expense categories.</p>
+<p>This ModelForm handles category creation with automatic user assignment.
+The ‘user’ field is excluded because it’s set automatically from the
+request object in the view, preventing users from assigning categories
+to other users.</p>
+<dl class="simple">
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>Automatic user assignment in view layer</p></li>
+<li><p>Supports icon image upload</p></li>
+<li><p>Enforces unique category names per user</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">categoryForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">FILES</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">category</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">category</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<span class="gp">... </span>    <span class="n">category</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The user field is explicitly excluded to prevent tampering.
+Always use commit=False and assign the user from request.user.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/expensesApp/froms.html#categoryForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.froms.categoryForm.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Metadata configuration for categoryForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>Category model this form is based on</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.Meta.fields" title="Link to this definition"></a></dt>
+<dd><p>Include all model fields (shorthand ‘__all__’ means include everything)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.Meta.exclude">
+<span class="sig-name descname"><span class="pre">exclude</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.Meta.exclude" title="Link to this definition"></a></dt>
+<dd><p>Fields to exclude from the form (user is set automatically in view)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#expensesApp.models.Category" title="expensesApp.models.Category"><code class="xref py py-class docutils literal notranslate"><span class="pre">Category</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'__all__'</span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">exclude</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['user']</span></span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm._meta">
+<span class="sig-name descname"><span class="pre">_meta</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.forms.models.ModelFormOptions</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm._meta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'icon':</span> <span class="pre">&lt;django.forms.fields.ImageField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expensesApp.froms.categoryForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#expensesApp.froms.categoryForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.froms.</span></span><span class="sig-name descname"><span class="pre">ExpenseForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/froms.html#ExpenseForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.froms.ExpenseForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelForm</span></code></p>
+<p>Form for creating new expense transactions.</p>
+<p>A simplified ModelForm that only captures the expense amount.
+Other fields (user, cycle, category, timestamp) are set automatically
+by the view based on the current request context and user selections.</p>
+<dl class="simple">
+<dt>Why only amount?:</dt><dd><ul class="simple">
+<li><p>Category is selected separately in the template dropdown</p></li>
+<li><p>User comes from request.user</p></li>
+<li><p>Cycle comes from active budget cycle</p></li>
+<li><p>Timestamp is auto-set by the model</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">ExpenseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">expense</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">expense</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span>
+<span class="gp">... </span>    <span class="n">expense</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">selected_category</span>
+<span class="gp">... </span>    <span class="n">expense</span><span class="o">.</span><span class="n">cycle</span> <span class="o">=</span> <span class="n">active_cycle</span>
+<span class="gp">... </span>    <span class="n">expense</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the ‘amount’ field is exposed to users. All other fields
+are populated automatically in the view based on the current
+session and user selections.</p>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.Meta">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">Meta</span></span><a class="reference internal" href="_modules/expensesApp/froms.html#ExpenseForm.Meta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.froms.ExpenseForm.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Metadata configuration for ExpenseForm.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>Expense model this form is based on</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm.Meta.fields" title="Link to this definition"></a></dt>
+<dd><p>Tuple specifying which model fields to include in form</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#expensesApp.models.Expense" title="expensesApp.models.Expense"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expense</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('amount',)</span></span><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm._meta">
+<span class="sig-name descname"><span class="pre">_meta</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.forms.models.ModelFormOptions</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm._meta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'amount':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;}</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expensesApp.froms.ExpenseForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#expensesApp.froms.ExpenseForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.froms.</span></span><span class="sig-name descname"><span class="pre">CycleForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bound_field_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/froms.html#CycleForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.froms.CycleForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<p>Form for creating and updating budget spending cycles.</p>
+<p>A standard Django Form (not a ModelForm) that collects budget cycle
+parameters from the user. This form is used to initialize or modify
+the user’s spending cycle, with start/end dates calculated server-side.</p>
+<dl class="simple">
+<dt>Why not a ModelForm?:</dt><dd><ul class="simple">
+<li><p>start_date and end_date are calculated, not user input</p></li>
+<li><p>is_active is set programmatically</p></li>
+<li><p>Only allowance and duration are needed from users</p></li>
+</ul>
+</dd>
+<dt>Form Fields:</dt><dd><p>total_allowance (Decimal): User’s total budget for the cycle
+duration_days (Integer): Length of the budget cycle in days</p>
+</dd>
+<dt>Validation Rules:</dt><dd><ul class="simple">
+<li><p>total_allowance: Minimum $0.01, maximum 10 digits with 2 decimal places</p></li>
+<li><p>duration_days: Between 1 and 365 days (inclusive)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">form</span> <span class="o">=</span> <span class="n">CycleForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">allowance</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;total_allowance&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">days</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;duration_days&#39;</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="n">start_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">end_date</span> <span class="o">=</span> <span class="n">start_date</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">total_allowance</span><span class="o">=</span><span class="n">allowance</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">start_date</span><span class="o">=</span><span class="n">start_date</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">end_date</span><span class="o">=</span><span class="n">end_date</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span>    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a standard Form, not a ModelForm, because the Cycle model
+contains calculated fields (start_date, end_date) that are derived
+from these inputs rather than collected directly from users.
+The one-year maximum (365 days) encourages regular budget reviews.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm.total_allowance">
+<span class="sig-name descname"><span class="pre">total_allowance</span></span><a class="headerlink" href="#expensesApp.froms.CycleForm.total_allowance" title="Link to this definition"></a></dt>
+<dd><p>Total budget amount for the spending cycle.</p>
+<p>This is the maximum amount the user can spend during the budget cycle.</p>
+<dl class="simple">
+<dt>Validation Rules:</dt><dd><ul class="simple">
+<li><p>Maximum 10 digits total (e.g., 9,999,999.99)</p></li>
+<li><p>Maximum 2 decimal places (cents precision)</p></li>
+<li><p>Minimum value: $0.01 (prevents zero or negative budgets)</p></li>
+<li><p>Must be a positive decimal number</p></li>
+</ul>
+</dd>
+<dt>Example valid values:</dt><dd><ul class="simple">
+<li><p>500.00 (Five hundred dollars)</p></li>
+<li><p>1000.50 (One thousand dollars and fifty cents)</p></li>
+<li><p>250.75 (Two hundred fifty dollars and seventy-five cents)</p></li>
+</ul>
+</dd>
+<dt>Example invalid values:</dt><dd><ul class="simple">
+<li><p>0.00 (Too low - must be at least $0.01)</p></li>
+<li><p>-50.00 (Negative not allowed)</p></li>
+<li><p>1000.123 (Too many decimal places)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The value is stored as Decimal to maintain precise
+monetary calculations without floating-point errors.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm.base_fields">
+<span class="sig-name descname"><span class="pre">base_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'duration_days':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'total_allowance':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;}</span></span><a class="headerlink" href="#expensesApp.froms.CycleForm.base_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm.declared_fields">
+<span class="sig-name descname"><span class="pre">declared_fields</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'duration_days':</span> <span class="pre">&lt;django.forms.fields.IntegerField</span> <span class="pre">object&gt;,</span> <span class="pre">'total_allowance':</span> <span class="pre">&lt;django.forms.fields.DecimalField</span> <span class="pre">object&gt;}</span></span><a class="headerlink" href="#expensesApp.froms.CycleForm.declared_fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm.media">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">media</span></span><a class="headerlink" href="#expensesApp.froms.CycleForm.media" title="Link to this definition"></a></dt>
+<dd><p>Return all media required to render the widgets on this form.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.froms.CycleForm.duration_days">
+<span class="sig-name descname"><span class="pre">duration_days</span></span><a class="headerlink" href="#expensesApp.froms.CycleForm.duration_days" title="Link to this definition"></a></dt>
+<dd><p>Length of the budget cycle in days.</p>
+<p>Determines how long the budget cycle will last from the start date.
+The system automatically calculates the end date based on this value.</p>
+<dl class="simple">
+<dt>Validation Rules:</dt><dd><ul class="simple">
+<li><p>Minimum: 1 day (single day cycle - for daily budgeting)</p></li>
+<li><p>Maximum: 365 days (one year - annual budget cycle)</p></li>
+<li><p>Must be a positive integer</p></li>
+</ul>
+</dd>
+<dt>How end date is calculated:</dt><dd><p>start_date = current date (when form is submitted)
+end_date = start_date + (duration_days - 1)</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<ul class="simple">
+<li><p>duration_days = 1 → Same day cycle (ends today)</p></li>
+<li><p>duration_days = 7 → One week cycle</p></li>
+<li><p>duration_days = 30 → Approximately one month cycle</p></li>
+<li><p>duration_days = 365 → One year cycle</p></li>
+</ul>
+<dl class="simple">
+<dt>Why limit to 365 days?:</dt><dd><ul class="simple">
+<li><p>Encourages regular budget reviews</p></li>
+<li><p>Prevents excessively long cycles</p></li>
+<li><p>Aligns with annual financial planning</p></li>
+<li><p>Maintains data freshness</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Includes validation to prevent cycles longer than one year
+to ensure regular budget reviews and accurate tracking.
+Users can create a new cycle after the previous one ends.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expensesApp.models">
+<span id="expensesapp-models-module"></span><h2>expensesApp.models module<a class="headerlink" href="#module-expensesApp.models" title="Link to this heading"></a></h2>
+<p>Expenses App Models Module.</p>
+<p>This module defines the database models for the expense tracking system:</p>
+<dl class="simple">
+<dt>Models Included:</dt><dd><ul class="simple">
+<li><p>Cycle: Represents budget periods with spending limits and date ranges</p></li>
+<li><p>Category: Organizes expenses by type for better tracking</p></li>
+<li><p>Expense: Records individual spending transactions</p></li>
+</ul>
+</dd>
+</dl>
+<p>Each model includes appropriate fields, relationships, and methods
+for managing personal finance data with user-specific filtering.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.models.</span></span><span class="sig-name descname"><span class="pre">Cycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/models.html#Cycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.models.Cycle" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a budget cycle for a user’s expense tracking period.</p>
+<p>A cycle defines the timeframe during which expenses are tracked against
+a total allowance. Each user has one active cycle at a time, which is
+used to calculate spending limits and progress.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#expensesApp.models.Cycle.user" title="Link to this definition"></a></dt>
+<dd><p>One-to-one relationship with userRegistration model.
+Each user can have only one active cycle at a time.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.start_date">
+<span class="sig-name descname"><span class="pre">start_date</span></span><a class="headerlink" href="#expensesApp.models.Cycle.start_date" title="Link to this definition"></a></dt>
+<dd><p>Starting date of the budget cycle.
+All expenses after this date belong to this cycle.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.end_date">
+<span class="sig-name descname"><span class="pre">end_date</span></span><a class="headerlink" href="#expensesApp.models.Cycle.end_date" title="Link to this definition"></a></dt>
+<dd><p>Ending date of the budget cycle.
+Expenses after this date are not counted in this cycle.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.total_allowance">
+<span class="sig-name descname"><span class="pre">total_allowance</span></span><a class="headerlink" href="#expensesApp.models.Cycle.total_allowance" title="Link to this definition"></a></dt>
+<dd><p>Maximum spending amount allowed for this cycle.
+Used to calculate remaining budget and progress.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.is_active">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#expensesApp.models.Cycle.is_active" title="Link to this definition"></a></dt>
+<dd><p>Flag indicating if this is the current active cycle.
+Only one cycle can be active per user at any time.</p>
+</dd></dl>
+
+<dl class="simple">
+<dt>Relationships:</dt><dd><ul class="simple">
+<li><p>OneToOne with userRegistration (each user has one cycle at a time)</p></li>
+<li><p>One-to-Many with Expense (a cycle can have many expenses)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">start_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">end_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2024</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">total_allowance</span><span class="o">=</span><span class="mf">1000.00</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+<span class="go">&#39;john_doe 2024-01-01----2024-01-31&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only one cycle should be active per user at any given time.
+The is_active flag is managed by the setCycle view.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>One-to-one relationship to the user who owns this budget cycle.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: OneToOneField (each user has exactly one cycle at a time)</p></li>
+<li><p>Related Model: userRegistration (custom user model)</p></li>
+<li><p>Nullable: Yes (allows cycles without user association for testing)</p></li>
+<li><p>Blank: Yes (can be empty in forms)</p></li>
+<li><p>On Delete: CASCADE - if user is deleted, their cycle is also deleted</p></li>
+</ul>
+</dd>
+<dt>Why OneToOne?:</dt><dd><p>Users should only have ONE active budget cycle at a time.
+This enforces that constraint at the database level.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">start_date</span></span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Starting date of the budget cycle.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: DateField (stores year, month, day)</p></li>
+<li><p>Default: Current date/time when cycle is created</p></li>
+<li><p>Timezone: Uses Django’s timezone settings</p></li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><p>Expenses with timestamp &gt;= start_date belong to this cycle.
+Used to calculate days remaining and daily spending limits.</p>
+</dd>
+</dl>
+<p>Example: 2024-01-01 (January 1, 2024)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">end_date</span></span><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Ending date of the budget cycle.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: DateField (stores year, month, day)</p></li>
+<li><p>Default: Current date/time when cycle is created</p></li>
+<li><p>Must be &gt;= start_date (enforced in view logic)</p></li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><p>Expenses with timestamp &lt;= end_date belong to this cycle.
+Used with start_date to calculate total cycle duration.
+After this date, the cycle is considered ‘ended’.</p>
+</dd>
+</dl>
+<p>Example: 2024-01-31 (January 31, 2024)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">total_allowance</span></span><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Total spending budget for the cycle.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: DecimalField (precision for monetary values)</p></li>
+<li><p>Max Digits: 10 (up to 99,999,999.99)</p></li>
+<li><p>Decimal Places: 2 (cents precision)</p></li>
+<li><p>Required: Yes (must be provided)</p></li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Compared against total_expenses to track progress</p></li>
+<li><p>Used to calculate remaining budget</p></li>
+<li><p>Determines safe daily spending limits</p></li>
+</ul>
+</dd>
+<dt>Calculations:</dt><dd><p>remaining_budget = total_allowance - total_spent
+progress_percent = (total_spent / total_allowance) * 100
+safe_daily_limit = remaining_budget / days_remaining</p>
+</dd>
+</dl>
+<p>Example: 1000.00 (One thousand dollars)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">is_active</span></span><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd><p>Flag indicating if this is the user’s active budget cycle.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: BooleanField (True/False)</p></li>
+<li><p>Default: True (new cycles start as active)</p></li>
+</ul>
+</dd>
+<dt>Behavior:</dt><dd><ul class="simple">
+<li><p>Only ONE cycle per user should have is_active=True</p></li>
+<li><p>Active cycle is used for current expense tracking</p></li>
+<li><p>Inactive cycles are kept for historical data</p></li>
+<li><p>Users can only add expenses to the active cycle</p></li>
+</ul>
+</dd>
+<dt>State Transitions:</dt><dd><ul class="simple">
+<li><p>New cycle created → is_active = True</p></li>
+<li><p>Cycle ends (past end_date) → set is_active = False</p></li>
+<li><p>User creates new cycle → old cycle becomes inactive</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Deactivate old cycle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_cycle</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">old_cycle</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create new active cycle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_cycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>  <span class="c1"># is_active=True by default</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#expensesApp.models.Cycle.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#expensesApp.models.Cycle.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#expensesApp.models.Cycle.NotUpdated" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectNotUpdated</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle._meta">
+<span class="sig-name descname"><span class="pre">_meta</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Options</span> <span class="pre">for</span> <span class="pre">Cycle&gt;</span></span><a class="headerlink" href="#expensesApp.models.Cycle._meta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.expense_set">
+<span class="sig-name descname"><span class="pre">expense_set</span></span><a class="headerlink" href="#expensesApp.models.Cycle.expense_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_reverse_many_to_one_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.get_next_by_end_date">
+<span class="sig-name descname"><span class="pre">get_next_by_end_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateField:</span> <span class="pre">end_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Cycle.get_next_by_end_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.get_next_by_start_date">
+<span class="sig-name descname"><span class="pre">get_next_by_start_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateField:</span> <span class="pre">start_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Cycle.get_next_by_start_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.get_previous_by_end_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_end_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateField:</span> <span class="pre">end_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Cycle.get_previous_by_end_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.get_previous_by_start_date">
+<span class="sig-name descname"><span class="pre">get_previous_by_start_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateField:</span> <span class="pre">start_date&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Cycle.get_previous_by_start_date" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#expensesApp.models.Cycle.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#expensesApp.models.Cycle.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Cycle.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#expensesApp.models.Cycle.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.models.Category">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.models.</span></span><span class="sig-name descname"><span class="pre">Category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/models.html#Category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.models.Category" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents an expense category for organizing spending.</p>
+<p>Categories allow users to group their expenses by type (e.g., Food,
+Transport, Entertainment, Utilities). Each category is unique per user,
+meaning two users can have a “Food” category, but one user cannot have
+duplicate category names.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#expensesApp.models.Category.user" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to userRegistration (owner of the category)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#expensesApp.models.Category.name" title="Link to this definition"></a></dt>
+<dd><p>Display name of the category (required, max 100 chars)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.icon">
+<span class="sig-name descname"><span class="pre">icon</span></span><a class="headerlink" href="#expensesApp.models.Category.icon" title="Link to this definition"></a></dt>
+<dd><p>Optional image icon for visual representation</p>
+</dd></dl>
+
+<dl class="simple">
+<dt>Constraints:</dt><dd><ul class="simple">
+<li><p>unique_together = [‘user’, ‘name’]: Prevents duplicate category names per user</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">category</span> <span class="o">=</span> <span class="n">Category</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Groceries&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;groceries.png&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">category</span><span class="p">)</span>
+<span class="go">&#39;Groceries&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Categories are user-specific. Each user has their own set of
+categories independent of other users.</p>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to the user who owns this category.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: ForeignKey (many categories can belong to one user)</p></li>
+<li><p>Related Model: userRegistration (custom user model)</p></li>
+<li><p>Nullable: Yes (allows categories without user for testing)</p></li>
+<li><p>Blank: Yes (can be empty in forms)</p></li>
+<li><p>On Delete: CASCADE - if user is deleted, their categories are deleted</p></li>
+</ul>
+</dd>
+<dt>Why ForeignKey?:</dt><dd><p>Users can have multiple categories, but each category belongs
+to exactly one user. This is a standard one-to-many relationship.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>User “john” can have categories: Food, Transport, Entertainment
+User “jane” can have categories: Food, Rent, Utilities
+(Both can have “Food” - it’s independent per user)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Display name of the expense category.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: CharField (string/text)</p></li>
+<li><p>Max Length: 100 characters</p></li>
+<li><p>Required: Yes (cannot be null or blank)</p></li>
+<li><p>Unique together with user field</p></li>
+</ul>
+</dd>
+<dt>Validation:</dt><dd><ul class="simple">
+<li><p>Must be unique per user (enforced by Meta.unique_together)</p></li>
+<li><p>Maximum 100 characters</p></li>
+<li><p>Cannot be empty string</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<ul class="simple">
+<li><p>“Food &amp; Dining”</p></li>
+<li><p>“Transportation”</p></li>
+<li><p>“Rent/Mortgage”</p></li>
+<li><p>“Utilities”</p></li>
+<li><p>“Entertainment”</p></li>
+<li><p>“Healthcare”</p></li>
+<li><p>“Shopping”</p></li>
+<li><p>“Education”</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Category names should be descriptive enough to help users
+understand what type of expenses belong in each category.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">icon</span></span><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd><p>Optional icon image for visual category representation.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: ImageField (handles image upload and storage)</p></li>
+<li><p>Required: No (null=True, blank=True)</p></li>
+<li><p>Upload To: Root of MEDIA_ROOT (empty string = MEDIA_ROOT)</p></li>
+<li><p>Default: ‘anchor.png’ (default icon if none provided)</p></li>
+</ul>
+</dd>
+<dt>Supported Formats:</dt><dd><ul class="simple">
+<li><p>PNG, JPG, JPEG, GIF (depends on Pillow library)</p></li>
+</ul>
+</dd>
+<dt>File Storage:</dt><dd><ul class="simple">
+<li><p>Uploads to: MEDIA_ROOT / (filename)</p></li>
+<li><p>URL accessible at: MEDIA_URL / (filename)</p></li>
+<li><p>Default icon: static/images/anchor.png</p></li>
+</ul>
+</dd>
+<dt>Usage in Templates:</dt><dd><p>&lt;img src=”{{ category.icon.url }}” alt=”{{ category.name }}”&gt;</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>User uploads ‘food_icon.png’ → stored at MEDIA_ROOT/food_icon.png
+URL: /images/food_icon.png</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For production, ensure MEDIA_ROOT and MEDIA_URL are properly
+configured and files are served by your web server.</p>
+</div>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Category.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#expensesApp.models.Category.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Category.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#expensesApp.models.Category.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Category.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#expensesApp.models.Category.NotUpdated" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectNotUpdated</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category._meta">
+<span class="sig-name descname"><span class="pre">_meta</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Options</span> <span class="pre">for</span> <span class="pre">Category&gt;</span></span><a class="headerlink" href="#expensesApp.models.Category._meta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.expense_set">
+<span class="sig-name descname"><span class="pre">expense_set</span></span><a class="headerlink" href="#expensesApp.models.Category.expense_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_reverse_many_to_one_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#expensesApp.models.Category.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#expensesApp.models.Category.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Category.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#expensesApp.models.Category.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="expensesApp.models.Expense">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">expensesApp.models.</span></span><span class="sig-name descname"><span class="pre">Expense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/models.html#Expense"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.models.Expense" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a financial expense transaction.</p>
+<p>Records individual spending entries linked to a specific budget cycle
+and category. Automatically timestamps each expense when created.
+Ordered by most recent first for easy review.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#expensesApp.models.Expense.user" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to userRegistration (person who made the expense)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.cycle">
+<span class="sig-name descname"><span class="pre">cycle</span></span><a class="headerlink" href="#expensesApp.models.Expense.cycle" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to Cycle (budget period this expense belongs to)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#expensesApp.models.Expense.category" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to Category (expense type classification)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.amount">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#expensesApp.models.Expense.amount" title="Link to this definition"></a></dt>
+<dd><p>Monetary value of the expense (supports up to 20 digits)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.time_stamp">
+<span class="sig-name descname"><span class="pre">time_stamp</span></span><a class="headerlink" href="#expensesApp.models.Expense.time_stamp" title="Link to this definition"></a></dt>
+<dd><p>Auto-recorded datetime when expense was created</p>
+</dd></dl>
+
+<dl class="simple">
+<dt>Default Ordering:</dt><dd><ul class="simple">
+<li><p>Most recent expenses first (newest at top)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expense</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">user</span><span class="o">=</span><span class="n">user</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">cycle</span><span class="o">=</span><span class="n">current_cycle</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">category</span><span class="o">=</span><span class="n">food_category</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">amount</span><span class="o">=</span><span class="mf">45.50</span>
+<span class="gp">... </span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">expense</span><span class="p">)</span>
+<span class="go">&#39;2024-01-15 14:30:00+00:00--Groceries&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The time_stamp is automatically set when the expense is created
+and cannot be manually modified by users.</p>
+</div>
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.DoesNotExist">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#expensesApp.models.Expense.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.MultipleObjectsReturned">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#expensesApp.models.Expense.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.NotUpdated">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">NotUpdated</span></span><a class="headerlink" href="#expensesApp.models.Expense.NotUpdated" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectNotUpdated</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DatabaseError</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense._meta">
+<span class="sig-name descname"><span class="pre">_meta</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Options</span> <span class="pre">for</span> <span class="pre">Expense&gt;</span></span><a class="headerlink" href="#expensesApp.models.Expense._meta" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.category_id">
+<span class="sig-name descname"><span class="pre">category_id</span></span><a class="headerlink" href="#expensesApp.models.Expense.category_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.cycle_id">
+<span class="sig-name descname"><span class="pre">cycle_id</span></span><a class="headerlink" href="#expensesApp.models.Expense.cycle_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.get_next_by_time_stamp">
+<span class="sig-name descname"><span class="pre">get_next_by_time_stamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">time_stamp&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Expense.get_next_by_time_stamp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.get_previous_by_time_stamp">
+<span class="sig-name descname"><span class="pre">get_previous_by_time_stamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;django.db.models.fields.DateTimeField:</span> <span class="pre">time_stamp&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#expensesApp.models.Expense.get_previous_by_time_stamp" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#expensesApp.models.Expense.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#expensesApp.models.Expense.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="expensesApp.models.Expense.user_id">
+<span class="sig-name descname"><span class="pre">user_id</span></span><a class="headerlink" href="#expensesApp.models.Expense.user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to the user who made this expense.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: ForeignKey (many expenses can belong to one user)</p></li>
+<li><p>Related Model: userRegistration (custom user model)</p></li>
+<li><p>Nullable: Yes (allows testing without user)</p></li>
+<li><p>On Delete: CASCADE - if user is deleted, their expenses are deleted</p></li>
+</ul>
+</dd>
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Associates expense with the correct user</p></li>
+<li><p>Enables user-specific expense filtering</p></li>
+<li><p>Ensures users only see their own expenses</p></li>
+<li><p>Used for user-specific budget calculations</p></li>
+</ul>
+</dd>
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>Always filter expenses by request.user in views</p></li>
+<li><p>Never show expenses of other users</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">cycle</span></span><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to the budget cycle this expense belongs to.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: ForeignKey (many expenses can belong to one cycle)</p></li>
+<li><p>Related Model: Cycle (budget period)</p></li>
+<li><p>Required: Yes (must be specified)</p></li>
+<li><p>On Delete: CASCADE - if cycle is deleted, its expenses are deleted</p></li>
+</ul>
+</dd>
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Associates expense with specific budget period</p></li>
+<li><p>Enables cycle-specific budget calculations</p></li>
+<li><p>Tracks which cycle’s allowance is being used</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Each expense must belong to an active cycle.
+Users cannot add expenses without an active budget cycle.
+The setCycle view enforces this requirement.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd><p>Foreign key to the category classifying this expense.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: ForeignKey (many expenses can belong to one category)</p></li>
+<li><p>Related Model: Category (expense classification)</p></li>
+<li><p>Required: Yes (must be specified)</p></li>
+<li><p>On Delete: CASCADE - if category is deleted, its expenses are deleted</p></li>
+</ul>
+</dd>
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Categorizes expenses for reporting</p></li>
+<li><p>Enables category-based spending analysis</p></li>
+<li><p>Powers the spending insights charts</p></li>
+</ul>
+</dd>
+<dt>Example Categories:</dt><dd><ul class="simple">
+<li><p>Food (groceries, restaurants)</p></li>
+<li><p>Transport (gas, public transit, taxis)</p></li>
+<li><p>Entertainment (movies, games, hobbies)</p></li>
+<li><p>Utilities (electricity, water, internet)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a category is deleted, all expenses in that category
+are also deleted (CASCADE behavior). Warn users before deletion.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">amount</span></span><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd><p>Monetary amount of the expense transaction.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: DecimalField (precision for monetary values)</p></li>
+<li><p>Max Digits: 20 (extremely large values - for enterprise use)</p></li>
+<li><p>Decimal Places: 2 (cents precision)</p></li>
+<li><p>Required: Yes (must be provided)</p></li>
+</ul>
+</dd>
+<dt>Validation:</dt><dd><ul class="simple">
+<li><p>Must be positive number (enforced in form and view)</p></li>
+<li><p>Cannot be zero or negative (business logic)</p></li>
+<li><p>Precision handles most real-world expenses</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<ul class="simple">
+<li><p>4.99 (Coffee)</p></li>
+<li><p>45.50 (Groceries)</p></li>
+<li><p>1200.00 (Rent)</p></li>
+<li><p>25000.00 (Car purchase)</p></li>
+</ul>
+<dl class="simple">
+<dt>Usage in Calculations:</dt><dd><ul class="simple">
+<li><p>total_spent = SUM(amount) where user=X and cycle=Y</p></li>
+<li><p>remaining_budget = total_allowance - total_spent</p></li>
+<li><p>today_spent = SUM(amount) where date=today</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Stored as Decimal to maintain precise monetary calculations
+without floating-point rounding errors. Always use Decimal
+for financial data, never float!</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">time_stamp</span></span><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd><p>Timestamp when the expense was created/recorded.</p>
+<dl class="simple">
+<dt>Field Details:</dt><dd><ul class="simple">
+<li><p>Type: DateTimeField (stores date and time)</p></li>
+<li><p>Auto-Add: automatically set to current time on creation</p></li>
+<li><p>Cannot be manually edited</p></li>
+<li><p>Includes timezone information (if USE_TZ=True)</p></li>
+</ul>
+</dd>
+<dt>Automatic Behavior:</dt><dd><ul class="simple">
+<li><p>Set when expense object is first saved</p></li>
+<li><p>Never changes on subsequent updates</p></li>
+<li><p>Uses Django’s timezone.now()</p></li>
+</ul>
+</dd>
+<dt>Usage:</dt><dd><ul class="simple">
+<li><p>Ordering expenses (newest first)</p></li>
+<li><p>Daily spending calculations</p></li>
+<li><p>Date-range filtering</p></li>
+<li><p>Spending patterns analysis</p></li>
+<li><p>Time-based reports</p></li>
+</ul>
+</dd>
+<dt>Example values:</dt><dd><ul class="simple">
+<li><p>2024-01-15 14:30:00+00:00 (January 15, 2024 at 2:30 PM UTC)</p></li>
+<li><p>2024-01-20 09:15:22+00:00 (January 20, 2024 at 9:15 AM UTC)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This timestamp reflects when the expense was entered,
+not necessarily when the purchase occurred. For precise
+purchase date tracking, consider adding a separate
+purchase_date field if needed in the future.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-expensesApp.tests">
+<span id="expensesapp-tests-module"></span><h2>expensesApp.tests module<a class="headerlink" href="#module-expensesApp.tests" title="Link to this heading"></a></h2>
+</section>
+<section id="module-expensesApp.urls">
+<span id="expensesapp-urls-module"></span><h2>expensesApp.urls module<a class="headerlink" href="#module-expensesApp.urls" title="Link to this heading"></a></h2>
+<p>Expenses App URL Configuration.</p>
+<p>This module defines all URL patterns for the expense tracking functionality
+including expense management, category operations, budget cycle setup,
+and spending analytics.</p>
+<dl class="simple">
+<dt>URL Patterns Overview:</dt><dd><ul class="simple">
+<li><p>Expense Management: Add expenses, view all expenses</p></li>
+<li><p>Category Management: Create, edit, delete, list categories</p></li>
+<li><p>Budget Cycle: Set up initial budget cycle</p></li>
+<li><p>Analytics: Visual spending insights and charts</p></li>
+</ul>
+</dd>
+</dl>
+<p>All URLs are namespaced under the expenses app and can be referenced
+using the ‘name’ attribute in templates and views.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="expensesApp.urls.urlpatterns">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.urls.</span></span><span class="sig-name descname"><span class="pre">urlpatterns</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;URLPattern</span> <span class="pre">'addExpense/'</span> <span class="pre">[name='addExpense']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'addcategory/'</span> <span class="pre">[name='addCategory']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'showAllexpenses/'</span> <span class="pre">[name='dislpayExpenses']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'categories/'</span> <span class="pre">[name='category_list']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'categories/edit/&lt;int:category_id&gt;/'</span> <span class="pre">[name='edit_category']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'categories/delete/&lt;int:category_id&gt;/'</span> <span class="pre">[name='delete_category']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'setCycle/'</span> <span class="pre">[name='setCycle']&gt;,</span> <span class="pre">&lt;URLPattern</span> <span class="pre">'insights/'</span> <span class="pre">[name='spendingInsights']&gt;]</span></span><a class="headerlink" href="#expensesApp.urls.urlpatterns" title="Link to this definition"></a></dt>
+<dd><p>URL Name Reference for Templates and Views:</p>
+<dl class="simple">
+<dt>Expense Operations:</dt><dd><p>{% url ‘addExpense’ %}              - Add new expense
+{% url ‘dislpayExpenses’ %}         - View all expenses (note typo)</p>
+</dd>
+<dt>Category Operations:</dt><dd><p>{% url ‘addCategory’ %}             - Create new category
+{% url ‘category_list’ %}           - List all categories
+{% url ‘edit_category’ category.id %} - Edit specific category
+{% url ‘delete_category’ category.id %} - Delete specific category</p>
+</dd>
+<dt>Budget Cycle:</dt><dd><p>{% url ‘setCycle’ %}                - Setup budget cycle</p>
+</dd>
+<dt>Analytics:</dt><dd><p>{% url ‘spendingInsights’ %}        - View spending charts</p>
+</dd>
+<dt>Usage in Views (reverse() function):</dt><dd><p>from django.urls import reverse
+url = reverse(‘addExpense’)
+url = reverse(‘edit_category’, args=[category_id])
+url = reverse(‘category_list’)</p>
+</dd>
+<dt>Usage in Redirects:</dt><dd><p>from django.shortcuts import redirect
+return redirect(‘addExpense’)
+return redirect(‘category_list’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-expensesApp.views">
+<span id="expensesapp-views-module"></span><h2>expensesApp.views module<a class="headerlink" href="#module-expensesApp.views" title="Link to this heading"></a></h2>
+<p>Expenses App Views Module.</p>
+<p>This module contains all view functions for the expense tracking application,
+including expense management, category operations, budget cycle setup,
+and spending analytics.</p>
+<p>All views are protected by &#64;login_required decorator, ensuring only
+authenticated users can access expense tracking functionality.</p>
+<dl class="simple">
+<dt>Views Included:</dt><dd><ul class="simple">
+<li><p>addExpense: Handle expense creation with budget validation</p></li>
+<li><p>addCategory: Create new expense categories</p></li>
+<li><p>displayAllexpenses: Show all user expenses</p></li>
+<li><p>setCycle: Initialize or update budget cycle</p></li>
+<li><p>spendingInsights: Generate spending analytics and charts</p></li>
+<li><p>category_list: Display all user categories</p></li>
+<li><p>edit_category: Modify existing categories</p></li>
+<li><p>delete_category: Remove categories and associated expenses</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.addExpense">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">addExpense</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#addExpense"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.addExpense" title="Link to this definition"></a></dt>
+<dd><p>Handle expense creation with comprehensive budget validation.</p>
+<p>This view processes expense form submissions, validates against the user’s
+active budget cycle, and provides real-time warnings for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Budget threshold alerts (80% and 100% usage)</p></li>
+<li><p>Daily safe spending limit violations</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>Pre-save validation and checks</p></li>
+<li><p>Budget percentage calculations (before and after save)</p></li>
+<li><p>Threshold alerts for budget milestones</p></li>
+<li><p>Daily spending limit warnings</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object containing POST data with expense amount
+and selected category</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered addExpense.html template with form and categories context</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Alert Conditions:</dt><dd><ul class="simple">
+<li><p>100% Budget: Error message when budget is exhausted</p></li>
+<li><p>80% Budget: Warning message when nearing limit</p></li>
+<li><p>Daily Limit: Warning when daily spending exceeds safe limit</p></li>
+</ul>
+</dd>
+<dt>Process Flow:</dt><dd><ol class="arabic simple">
+<li><p>GET: Display empty expense form with user’s categories</p></li>
+<li><p>POST: Process expense submission
+a. Validate form and category existence
+b. Check for active budget cycle
+c. Calculate pre-save budget percentage
+d. Save expense
+e. Calculate post-save budget percentage
+f. Trigger alerts based on thresholds
+g. Check daily spending limit
+h. Display appropriate success/error messages</p></li>
+</ol>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>POST request with:</dt><dd><p>amount: 50.00
+categories: Food</p>
+</dd>
+</dl>
+<p>Result: Expense saved, budget alerts shown if thresholds crossed</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.addCategory">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">addCategory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#addCategory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.addCategory" title="Link to this definition"></a></dt>
+<dd><p>Create a new expense category for the authenticated user.</p>
+<p>Allows users to define custom categories for organizing their expenses.
+Each category is user-specific and includes an optional icon image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object containing POST data with category name
+and optional icon file upload</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered addCategory.html template with category form</p>
+</dd>
+</dl>
+<dl>
+<dt>Process:</dt><dd><p>GET: Display empty category form
+POST: Process category creation</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Validate form data</p></li>
+<li><p>Assign user to category</p></li>
+<li><p>Save to database</p></li>
+<li><p>Display success/error messages</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>Validation:</dt><dd><ul class="simple">
+<li><p>Category name must be unique per user</p></li>
+<li><p>Name cannot be empty</p></li>
+<li><p>Icon file must be valid image format</p></li>
+</ul>
+</dd>
+<dt>Messages:</dt><dd><p>Success: ‘category added successfully!’
+Error: ‘category already exist’ (if duplicate name)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>POST request with:</dt><dd><p>name: “Transportation”
+icon: bus.png (optional)</p>
+</dd>
+</dl>
+<p>Result: New category created for the user</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.category_list">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">category_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#category_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.category_list" title="Link to this definition"></a></dt>
+<dd><p>Display all categories belonging to the authenticated user.</p>
+<p>Retrieves and displays alphabetically ordered list of user’s
+expense categories for management purposes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object from authenticated user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered category_list.html template with categories context</p>
+</dd>
+</dl>
+<dl>
+<dt>Context Variables:</dt><dd><p>categories: QuerySet of Category objects ordered alphabetically by name</p>
+</dd>
+<dt>Template Usage:</dt><dd><dl class="simple">
+<dt>{% for category in categories %}</dt><dd><p>{{ category.name }}
+&lt;img src=”{{ category.icon.url }}”&gt;
+&lt;a href=”{% url ‘edit_category’ category.id %}”&gt;Edit&lt;/a&gt;
+&lt;a href=”{% url ‘delete_category’ category.id %}”&gt;Delete&lt;/a&gt;</p>
+</dd>
+</dl>
+<p>{% endfor %}</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>GET /categories/ → Displays all user categories in alphabetical order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.edit_category">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">edit_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#edit_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.edit_category" title="Link to this definition"></a></dt>
+<dd><p>Edit an existing expense category.</p>
+<p>Allows users to modify category name and/or icon image.
+Ensures the category belongs to the requesting user for security.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – HTTP request object containing POST data for updates</p></li>
+<li><p><strong>category_id</strong> – Primary key of the category to edit (from URL)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered edit_category.html with pre-filled form
+POST (success): Redirect to category_list with success message
+POST (invalid): Re-render form with error messages</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GET</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>Verifies category belongs to current user</p></li>
+<li><p>Prevents editing other users’ categories</p></li>
+</ul>
+</dd>
+<dt>Messages:</dt><dd><p>Success: ‘Category “{name}” updated successfully!’
+Error: ‘Please correct the errors below’</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>POST /categories/edit/5/ with:</dt><dd><p>name: “Groceries” (updated from “Food”)
+icon: new_icon.png</p>
+</dd>
+</dl>
+<p>Result: Category updated and user redirected to category list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.delete_category">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">delete_category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#delete_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.delete_category" title="Link to this definition"></a></dt>
+<dd><p>Delete an existing expense category.</p>
+<p>Removes a category from the user’s account.
+⚠️ WARNING: All expenses associated with this category will also be deleted
+due to CASCADE relationship in the database model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> – HTTP request object (POST confirms deletion)</p></li>
+<li><p><strong>category_id</strong> – Primary key of the category to delete (from URL)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered delete_category.html with confirmation prompt
+POST: Redirect to category_list with success message after deletion</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GET</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>Verifies category belongs to current user</p></li>
+<li><p>Requires POST confirmation for deletion</p></li>
+</ul>
+</dd>
+<dt>Messages:</dt><dd><p>Success: ‘Category “{name}” deleted successfully!’</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Uses CASCADE delete - all expenses in this category will be removed!
+The confirmation page should display this warning to users.</p>
+</div>
+<p class="rubric">Example</p>
+<p>POST /categories/delete/5/
+Deletes category with id=5 and all related expenses</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.displayAllexpenses">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">displayAllexpenses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#displayAllexpenses"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.displayAllexpenses" title="Link to this definition"></a></dt>
+<dd><p>Display all expenses for the authenticated user.</p>
+<p>Retrieves and displays a complete list of expenses belonging to
+the current user, ordered by timestamp (newest first by model Meta).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object from authenticated user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered Expenses.html template with all user expenses in context</p>
+</dd>
+</dl>
+<dl>
+<dt>Context Variables:</dt><dd><dl class="simple">
+<dt>expenses: QuerySet of Expense objects for the current user</dt><dd><p>Ordered by time_stamp descending (newest first)</p>
+</dd>
+</dl>
+</dd>
+<dt>Template Usage:</dt><dd><dl class="simple">
+<dt>{% for expense in expenses %}</dt><dd><p>{{ expense.time_stamp }} - {{ expense.category.name }}: ${{ expense.amount }}</p>
+</dd>
+</dl>
+<p>{% endfor %}</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>GET /showAllexpenses/ → Displays all user expenses in reverse chronological order</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.setCycle">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">setCycle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#setCycle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.setCycle" title="Link to this definition"></a></dt>
+<dd><p>Create or update user’s budget spending cycle (User Story 1).</p>
+<p>Allows students to input their total cash allowance and cycle duration.
+Automatically calculates start date, end date, and displays current daily
+spending limit based on remaining budget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object containing POST data with:
+total_allowance: Total budget for the cycle (min $0.01)
+duration_days: Number of days the cycle should last (1-365)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>form: CycleForm for user input
+existing_cycle: Current cycle if exists (for display)
+preview_daily_limit: Calculated safe daily spending amount</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rendered setCycle.html template with</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Process:</dt><dd><dl class="simple">
+<dt>GET Request:</dt><dd><ol class="arabic simple">
+<li><p>Check for existing cycle</p></li>
+<li><p>Pre-fill form if cycle exists</p></li>
+<li><p>Calculate preview daily limit</p></li>
+<li><p>Display form with current/pre-filled values</p></li>
+</ol>
+</dd>
+<dt>POST Request:</dt><dd><ol class="arabic simple">
+<li><p>Validate form data</p></li>
+<li><p>Calculate start_date = today</p></li>
+<li><p>Calculate end_date = start_date + duration_days - 1</p></li>
+<li><p>Create new cycle OR update existing</p></li>
+<li><p>Set is_active = True (deactivates any previous cycle)</p></li>
+<li><p>Redirect to home page with success message</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+<dt>Formula:</dt><dd><p>start_date = current date
+end_date = start_date + duration_days - 1
+days_remaining = max((end_date - today).days + 1, 1)
+remaining_budget = total_allowance - total_spent
+daily_safe_limit = remaining_budget / days_remaining</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<dl class="simple">
+<dt>POST request with:</dt><dd><p>total_allowance: 1000.00
+duration_days: 30</p>
+</dd>
+</dl>
+<p>Creates cycle: Jan 1 - Jan 30 with $1000 budget</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>First-time users are redirected here after registration
+due to is_first_login flag in user model.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="expensesApp.views.spendingInsights">
+<span class="sig-prename descclassname"><span class="pre">expensesApp.views.</span></span><span class="sig-name descname"><span class="pre">spendingInsights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/expensesApp/views.html#spendingInsights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#expensesApp.views.spendingInsights" title="Link to this definition"></a></dt>
+<dd><p>Generate visual spending breakdown for user’s active budget cycle (User Story 3).</p>
+<p>Creates a server-side computed horizontal bar chart showing expenses
+grouped by category with percentages. Uses pure CSS for visualization
+with no JavaScript required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object from authenticated user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>cycle: Active budget cycle
+total_spent: Sum of all expenses in current cycle
+category_rows: List of category spending breakdowns</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rendered spendingInsights.html template with</p>
+</dd>
+</dl>
+<dl>
+<dt>Category Row Structure:</dt><dd><ul class="simple">
+<li><p>name: Category name (string)</p></li>
+<li><p>amount: Total spent in category (Decimal)</p></li>
+<li><p>percentage: Percentage of total budget (float)</p></li>
+<li><p>color: Assigned color for visualization (hex code)</p></li>
+</ul>
+</dd>
+<dt>Process:</dt><dd><ol class="arabic simple">
+<li><p>Retrieve active cycle for current user</p></li>
+<li><p>Calculate total spent across all categories</p></li>
+<li><p>Group expenses by category using values() and annotate()</p></li>
+<li><p>Sum amounts per category</p></li>
+<li><p>Order by highest spending first</p></li>
+<li><p>Calculate percentage for each category</p></li>
+<li><p>Assign distinct colors from predefined palette</p></li>
+<li><p>Prepare data for CSS bar chart rendering</p></li>
+</ol>
+</dd>
+<dt>Color Palette (10 colors):</dt><dd><p>indigo, amber, emerald, red, blue, purple, pink, teal, orange, lime</p>
+</dd>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>category_rows = [</dt><dd><p>{‘name’: ‘Food’, ‘amount’: 350.00, ‘percentage’: 35.0, ‘color’: ‘#6366f1’},
+{‘name’: ‘Transport’, ‘amount’: 150.00, ‘percentage’: 15.0, ‘color’: ‘#f59e0b’},
+{‘name’: ‘Entertainment’, ‘amount’: 100.00, ‘percentage’: 10.0, ‘color’: ‘#10b981’}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All calculations are server-side to ensure data accuracy
+and prevent manipulation. Charts render without external
+JavaScript libraries for improved performance.</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-expensesApp">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-expensesApp" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="django project documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="expensesApp.migrations.html" class="btn btn-neutral float-right" title="expensesApp.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Abdelrahman Mohamed Abdelrahman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>softwareProject.views &mdash; Masroofy 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Masroofy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">django project documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../softwareProject.html">softwareProject package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../expensesApp.html">expensesApp package</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../search.html">Search Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Masroofy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">softwareProject.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for softwareProject.views</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Main Application Views Module.</span>
+
+<span class="sd">This module contains the core views for the root application, including</span>
+<span class="sd">the main dashboard/home page that displays budget overview, spending</span>
+<span class="sd">metrics, and daily spending limits for authenticated users.</span>
+
+<span class="sd">Key Features:</span>
+<span class="sd">    - Budget cycle overview and status</span>
+<span class="sd">    - Safe daily limit calculation (server-side)</span>
+<span class="sd">    - Spending progress tracking with percentage</span>
+<span class="sd">    - Daily spending alerts</span>
+<span class="sd">    - Cycle status monitoring (active, ended, overspent)</span>
+
+<span class="sd">All views are protected by @login_required decorator to ensure only</span>
+<span class="sd">authenticated users can access the dashboard.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.shortcuts</span><span class="w"> </span><span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.contrib.auth.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">login_required</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">expensesApp.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Cycle</span><span class="p">,</span> <span class="n">Expense</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">django.db.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sum</span>
+
+
+<div class="viewcode-block" id="home">
+<a class="viewcode-back" href="../../softwareProject.html#softwareProject.views.home">[docs]</a>
+<span class="nd">@login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main dashboard view displaying user&#39;s budget cycle status and spending metrics.</span>
+<span class="sd">    </span>
+<span class="sd">    This view serves as the primary dashboard for authenticated users, showing</span>
+<span class="sd">    real-time budget information including total spent, remaining budget,</span>
+<span class="sd">    safe daily limit, and spending progress. All calculations are performed</span>
+<span class="sd">    server-side with no JavaScript required for maximum compatibility and security.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        request: HTTP request object from authenticated user</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered main.html template with comprehensive budget context data</span>
+<span class="sd">        </span>
+<span class="sd">    Formula Calculations:</span>
+<span class="sd">        total_spent = SUM(expense.amount) for current cycle</span>
+<span class="sd">        remaining_budget = total_allowance - total_spent</span>
+<span class="sd">        days_remaining = MAX((end_date - today).days + 1, 1)</span>
+<span class="sd">        safe_daily_limit = remaining_budget / days_remaining</span>
+<span class="sd">        progress_percent = MIN((total_spent / total_allowance) * 100, 100)</span>
+<span class="sd">        </span>
+<span class="sd">    Status Definitions:</span>
+<span class="sd">        - &#39;no_cycle&#39;: User has no active budget cycle configured</span>
+<span class="sd">        - &#39;active&#39;: Cycle is within date range and budget not exceeded</span>
+<span class="sd">        - &#39;ended&#39;: Current date is past cycle end date</span>
+<span class="sd">        - &#39;overspent&#39;: Total spending has exceeded total allowance</span>
+<span class="sd">        </span>
+<span class="sd">    Alert Conditions:</span>
+<span class="sd">        - Shows warning when today_spent &gt; safe_daily_limit (exceeds daily limit)</span>
+<span class="sd">        - Shows &quot;Cycle Ended&quot; message when today &gt; end_date</span>
+<span class="sd">        - Shows &quot;Budget Exceeded&quot; message when remaining_budget &lt; 0</span>
+<span class="sd">        - Shows setup prompt when no cycle exists</span>
+<span class="sd">        </span>
+<span class="sd">    Context Variables:</span>
+<span class="sd">        cycle (Cycle/None): Current active budget cycle object</span>
+<span class="sd">        safe_daily_limit (Decimal/None): Recommended daily spending limit</span>
+<span class="sd">        total_spent (Decimal): Total amount spent in current cycle</span>
+<span class="sd">        remaining_budget (Decimal/None): Budget remaining after expenses</span>
+<span class="sd">        days_remaining (int/None): Number of days left in cycle (minimum 1)</span>
+<span class="sd">        progress_percent (int): Percentage of budget used (0-100)</span>
+<span class="sd">        status (str): Cycle status - &#39;active&#39;, &#39;ended&#39;, &#39;overspent&#39;, &#39;no_cycle&#39;</span>
+<span class="sd">        today_spent (Decimal): Total amount spent today</span>
+<span class="sd">        over_daily_limit (bool): Whether today&#39;s spending exceeds safe limit</span>
+<span class="sd">        </span>
+<span class="sd">    Example Output:</span>
+<span class="sd">        If user has a $1000 budget for 30 days and spent $200:</span>
+<span class="sd">            total_spent = 200.00</span>
+<span class="sd">            remaining_budget = 800.00</span>
+<span class="sd">            days_remaining = 25 (assuming 5 days passed)</span>
+<span class="sd">            safe_daily_limit = 32.00 (800 / 25)</span>
+<span class="sd">            progress_percent = 20%</span>
+<span class="sd">            status = &#39;active&#39;</span>
+<span class="sd">        </span>
+<span class="sd">    Security:</span>
+<span class="sd">        - @login_required ensures only authenticated users can access</span>
+<span class="sd">        - Each user only sees their own data via request.user filtering</span>
+<span class="sd">        - No sensitive data exposed to unauthenticated users</span>
+<span class="sd">        </span>
+<span class="sd">    Performance Notes:</span>
+<span class="sd">        - Two database queries maximum:</span>
+<span class="sd">            1. Get active cycle</span>
+<span class="sd">            2. Sum of expenses for cycle</span>
+<span class="sd">            3. Sum of today&#39;s expenses (included in same query pattern)</span>
+<span class="sd">        - Uses aggregation for efficient database operations</span>
+<span class="sd">        - Decimal operations for precise monetary calculations</span>
+<span class="sd">        </span>
+<span class="sd">    Template Usage:</span>
+<span class="sd">        {{ cycle.start_date }} - Cycle start date</span>
+<span class="sd">        {{ cycle.end_date }} - Cycle end date</span>
+<span class="sd">        {{ cycle.total_allowance }} - Total budget amount</span>
+<span class="sd">        {{ total_spent }} - Amount spent so far</span>
+<span class="sd">        {{ remaining_budget }} - Budget remaining</span>
+<span class="sd">        {{ safe_daily_limit }} - Recommended daily spending limit</span>
+<span class="sd">        {{ progress_percent }} - Progress bar percentage</span>
+<span class="sd">        {{ today_spent }} - Today&#39;s spending total</span>
+<span class="sd">        {{ over_daily_limit }} - Warning flag for excess daily spending</span>
+<span class="sd">        {{ status }} - Current cycle status</span>
+<span class="sd">        </span>
+<span class="sd">    Conditional Display Examples:</span>
+<span class="sd">        {% if status == &#39;no_cycle&#39; %}</span>
+<span class="sd">            &lt;a href=&quot;{% url &#39;setCycle&#39; %}&quot;&gt;Set up your budget cycle&lt;/a&gt;</span>
+<span class="sd">        {% endif %}</span>
+<span class="sd">        </span>
+<span class="sd">        {% if over_daily_limit %}</span>
+<span class="sd">            &lt;div class=&quot;alert alert-warning&quot;&gt;</span>
+<span class="sd">                ⚠️ You&#39;ve exceeded your daily safe limit!</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        {% endif %}</span>
+<span class="sd">        </span>
+<span class="sd">        {% if status == &#39;overspent&#39; %}</span>
+<span class="sd">            &lt;div class=&quot;alert alert-danger&quot;&gt;</span>
+<span class="sd">                ❌ You have exceeded your budget!</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        {% endif %}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Initialize default context for users without a budget cycle</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;cycle&#39;</span><span class="p">:</span>            <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;safe_daily_limit&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;total_spent&#39;</span><span class="p">:</span>      <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;remaining_budget&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;days_remaining&#39;</span><span class="p">:</span>   <span class="kc">None</span><span class="p">,</span>
+        <span class="s1">&#39;progress_percent&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s1">&#39;status&#39;</span><span class="p">:</span>           <span class="s1">&#39;no_cycle&#39;</span><span class="p">,</span>
+        <span class="c1"># Daily warning fields</span>
+        <span class="s1">&#39;today_spent&#39;</span><span class="p">:</span>      <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;over_daily_limit&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Retrieve active budget cycle for current user</span>
+    <span class="n">cycle</span> <span class="o">=</span> <span class="n">Cycle</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">is_active</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">cycle</span><span class="p">:</span>
+        <span class="n">today</span> <span class="o">=</span> <span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Calculate total spent in current cycle</span>
+        <span class="c1"># ================================================================</span>
+        <span class="n">total_spent</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span>
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Calculate budget metrics</span>
+        <span class="c1"># ================================================================</span>
+        <span class="n">remaining_budget</span> <span class="o">=</span> <span class="n">cycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">-</span> <span class="n">total_spent</span>
+        <span class="c1"># Calculate days remaining (inclusive of today, minimum 1)</span>
+        <span class="n">days_remaining</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">cycle</span><span class="o">.</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">today</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Safe daily limit = remaining budget divided by days left</span>
+        <span class="n">safe_daily_limit</span> <span class="o">=</span> <span class="n">remaining_budget</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">days_remaining</span><span class="p">)</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Calculate spending progress percentage (capped at 100%)</span>
+        <span class="c1"># ================================================================</span>
+        <span class="n">progress_percent</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">cycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">progress_percent</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">total_spent</span> <span class="o">/</span> <span class="n">cycle</span><span class="o">.</span><span class="n">total_allowance</span> <span class="o">*</span> <span class="mi">100</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Determine cycle status based on date and budget</span>
+        <span class="c1"># ================================================================</span>
+        <span class="k">if</span> <span class="n">today</span> <span class="o">&gt;</span> <span class="n">cycle</span><span class="o">.</span><span class="n">end_date</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;ended&#39;</span>           <span class="c1"># Cycle has expired</span>
+        <span class="k">elif</span> <span class="n">remaining_budget</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;overspent&#39;</span>       <span class="c1"># Budget exhausted</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>          <span class="c1"># Cycle active and within budget</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Calculate today&#39;s spending for daily limit warning</span>
+        <span class="c1"># ================================================================</span>
+        <span class="n">today_spent</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span>
+            <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="n">cycle</span><span class="p">,</span> <span class="n">time_stamp__date</span><span class="o">=</span><span class="n">today</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">))[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.00&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Check if user has exceeded daily safe limit</span>
+        <span class="n">over_daily_limit</span> <span class="o">=</span> <span class="p">(</span><span class="n">today_spent</span> <span class="o">&gt;</span> <span class="n">safe_daily_limit</span><span class="p">)</span> <span class="k">if</span> <span class="n">safe_daily_limit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">False</span>
+
+        <span class="c1"># ================================================================</span>
+        <span class="c1"># Update context with calculated metrics</span>
+        <span class="c1"># ================================================================</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s1">&#39;cycle&#39;</span><span class="p">:</span>            <span class="n">cycle</span><span class="p">,</span>
+            <span class="s1">&#39;safe_daily_limit&#39;</span><span class="p">:</span> <span class="n">safe_daily_limit</span><span class="p">,</span>
+            <span class="s1">&#39;total_spent&#39;</span><span class="p">:</span>      <span class="n">total_spent</span><span class="p">,</span>
+            <span class="s1">&#39;remaining_budget&#39;</span><span class="p">:</span> <span class="n">remaining_budget</span><span class="p">,</span>
+            <span class="s1">&#39;days_remaining&#39;</span><span class="p">:</span>   <span class="n">days_remaining</span><span class="p">,</span>
+            <span class="s1">&#39;progress_percent&#39;</span><span class="p">:</span> <span class="n">progress_percent</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span>           <span class="n">status</span><span class="p">,</span>
+            <span class="s1">&#39;today_spent&#39;</span><span class="p">:</span>      <span class="n">today_spent</span><span class="p">,</span>
+            <span class="s1">&#39;over_daily_limit&#39;</span><span class="p">:</span> <span class="n">over_daily_limit</span><span class="p">,</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;main.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># POTENTIAL FUTURE VIEWS</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Additional Views That Could Be Added:</span>
+
+<span class="sd">1. Analytics Dashboard (More Detailed):</span>
+<span class="sd">    </span>
+<span class="sd">    @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">    def analytics_dashboard(request):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Advanced analytics with charts and graphs.</span>
+<span class="sd">        </span>
+<span class="sd">        Features:</span>
+<span class="sd">            - Monthly spending comparison</span>
+<span class="sd">            - Category trend analysis</span>
+<span class="sd">            - Predictive budget forecasting</span>
+<span class="sd">            - Export data functionality</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        pass</span>
+
+<span class="sd">2. Expense Reports:</span>
+
+<span class="sd">    @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">    def expense_reports(request):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Generate detailed expense reports.</span>
+<span class="sd">        </span>
+<span class="sd">        Options:</span>
+<span class="sd">            - Filter by date range</span>
+<span class="sd">            - Filter by category</span>
+<span class="sd">            - Filter by amount range</span>
+<span class="sd">            - Export as PDF or CSV</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        pass</span>
+
+<span class="sd">3. Budget Recommendations:</span>
+
+<span class="sd">    @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">    def budget_recommendations(request):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        AI-powered budget recommendations based on spending patterns.</span>
+<span class="sd">        </span>
+<span class="sd">        Features:</span>
+<span class="sd">            - Category spending analysis</span>
+<span class="sd">            - Savings opportunities</span>
+<span class="sd">            - Personalized budget suggestions</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        pass</span>
+
+<span class="sd">4. Notification Settings:</span>
+
+<span class="sd">    @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">    def notification_settings(request):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Configure spending alerts and notifications.</span>
+<span class="sd">        </span>
+<span class="sd">        Options:</span>
+<span class="sd">            - Daily limit warnings</span>
+<span class="sd">            - Budget threshold alerts (80%, 100%)</span>
+<span class="sd">            - Cycle end reminders</span>
+<span class="sd">            - Email notifications</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        pass</span>
+
+<span class="sd">5. Data Export:</span>
+
+<span class="sd">    @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">    def export_data(request):</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        Export user expense data.</span>
+<span class="sd">        </span>
+<span class="sd">        Formats:</span>
+<span class="sd">            - CSV for Excel</span>
+<span class="sd">            - JSON for API integration</span>
+<span class="sd">            - PDF for reports</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        pass</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># HELPER FUNCTIONS (For Code Organization)</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Helper Functions for Future Refactoring:</span>
+
+<span class="sd">def calculate_cycle_metrics(cycle, user):</span>
+
+<span class="sd">    Calculate all budget metrics for a given cycle.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        cycle: Cycle model instance</span>
+<span class="sd">        user: User model instance</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: {</span>
+<span class="sd">            &#39;total_spent&#39;: Decimal,</span>
+<span class="sd">            &#39;remaining_budget&#39;: Decimal,</span>
+<span class="sd">            &#39;days_remaining&#39;: int,</span>
+<span class="sd">            &#39;safe_daily_limit&#39;: Decimal,</span>
+<span class="sd">            &#39;progress_percent&#39;: int,</span>
+<span class="sd">            &#39;status&#39;: str,</span>
+<span class="sd">            &#39;today_spent&#39;: Decimal,</span>
+<span class="sd">            &#39;over_daily_limit&#39;: bool</span>
+<span class="sd">        }</span>
+
+<span class="sd">    today = timezone.now().date()</span>
+<span class="sd">    </span>
+<span class="sd">    total_spent = Expense.objects.filter(</span>
+<span class="sd">        user=user, cycle=cycle</span>
+<span class="sd">    ).aggregate(total=Sum(&#39;amount&#39;))[&#39;total&#39;] or Decimal(&#39;0.00&#39;)</span>
+<span class="sd">    </span>
+<span class="sd">    remaining_budget = cycle.total_allowance - total_spent</span>
+<span class="sd">    days_remaining = max((cycle.end_date - today).days + 1, 1)</span>
+<span class="sd">    safe_daily_limit = remaining_budget / Decimal(days_remaining)</span>
+<span class="sd">    </span>
+<span class="sd">    progress_percent = 0</span>
+<span class="sd">    if cycle.total_allowance &gt; 0:</span>
+<span class="sd">        progress_percent = min(int(total_spent / cycle.total_allowance * 100), 100)</span>
+<span class="sd">    </span>
+<span class="sd">    if today &gt; cycle.end_date:</span>
+<span class="sd">        status = &#39;ended&#39;</span>
+<span class="sd">    elif remaining_budget &lt; 0:</span>
+<span class="sd">        status = &#39;overspent&#39;</span>
+<span class="sd">    else:</span>
+<span class="sd">        status = &#39;active&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    today_spent = Expense.objects.filter(</span>
+<span class="sd">        user=user, cycle=cycle, time_stamp__date=today</span>
+<span class="sd">    ).aggregate(total=Sum(&#39;amount&#39;))[&#39;total&#39;] or Decimal(&#39;0.00&#39;)</span>
+<span class="sd">    </span>
+<span class="sd">    over_daily_limit = today_spent &gt; safe_daily_limit if safe_daily_limit &gt; 0 else False</span>
+<span class="sd">    </span>
+<span class="sd">    return {</span>
+<span class="sd">        &#39;total_spent&#39;: total_spent,</span>
+<span class="sd">        &#39;remaining_budget&#39;: remaining_budget,</span>
+<span class="sd">        &#39;days_remaining&#39;: days_remaining,</span>
+<span class="sd">        &#39;safe_daily_limit&#39;: safe_daily_limit,</span>
+<span class="sd">        &#39;progress_percent&#39;: progress_percent,</span>
+<span class="sd">        &#39;status&#39;: status,</span>
+<span class="sd">        &#39;today_spent&#39;: today_spent,</span>
+<span class="sd">        &#39;over_daily_limit&#39;: over_daily_limit,</span>
+<span class="sd">    }</span>
+
+
+<span class="sd">def get_daily_spending(user, cycle, date=None):</span>
+
+<span class="sd">    Get spending amount for a specific date.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        user: User model instance</span>
+<span class="sd">        cycle: Cycle model instance</span>
+<span class="sd">        date: Date to check (defaults to today)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Decimal: Total spending for the specified date</span>
+
+<span class="sd">    if date is None:</span>
+<span class="sd">        date = timezone.now().date()</span>
+<span class="sd">    </span>
+<span class="sd">    return Expense.objects.filter(</span>
+<span class="sd">        user=user, cycle=cycle, time_stamp__date=date</span>
+<span class="sd">    ).aggregate(total=Sum(&#39;amount&#39;))[&#39;total&#39;] or Decimal(&#39;0.00&#39;)</span>
+
+
+<span class="sd">def get_category_breakdown(user, cycle):</span>
+
+<span class="sd">    Get spending breakdown by category.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        user: User model instance</span>
+<span class="sd">        cycle: Cycle model instance</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        QuerySet: Category spending aggregates</span>
+
+<span class="sd">    return (</span>
+<span class="sd">        Expense.objects</span>
+<span class="sd">        .filter(user=user, cycle=cycle)</span>
+<span class="sd">        .values(&#39;category__name&#39;)</span>
+<span class="sd">        .annotate(total=Sum(&#39;amount&#39;))</span>
+<span class="sd">        .order_by(&#39;-total&#39;)</span>
+<span class="sd">    )</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># TESTING EXAMPLES</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Unit Tests for Home View:</span>
+
+<span class="sd">from django.test import TestCase, Client</span>
+<span class="sd">from django.contrib.auth import get_user_model</span>
+<span class="sd">from django.utils import timezone</span>
+<span class="sd">from datetime import timedelta</span>
+<span class="sd">from expensesApp.models import Cycle, Category, Expense</span>
+<span class="sd">from decimal import Decimal</span>
+
+<span class="sd">User = get_user_model()</span>
+
+<span class="sd">class HomeViewTest(TestCase):</span>
+<span class="sd">    </span>
+<span class="sd">    def setUp(self):</span>
+<span class="sd">        # Set up test data.</span>
+<span class="sd">        self.client = Client()</span>
+<span class="sd">        self.user = User.objects.create_user(</span>
+<span class="sd">            username=&#39;testuser&#39;,</span>
+<span class="sd">            password=&#39;testpass123&#39;</span>
+<span class="sd">        )</span>
+<span class="sd">        self.client.login(username=&#39;testuser&#39;, password=&#39;testpass123&#39;)</span>
+<span class="sd">        </span>
+<span class="sd">    def test_home_view_requires_login(self):</span>
+<span class="sd">        # Test that unauthenticated users are redirected.</span>
+<span class="sd">        self.client.logout()</span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.status_code, 302)</span>
+<span class="sd">        self.assertIn(&#39;/login/&#39;, response.url)</span>
+<span class="sd">    </span>
+<span class="sd">    def test_home_view_no_cycle(self):</span>
+<span class="sd">        # Test home view when user has no budget cycle.</span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.status_code, 200)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;status&#39;], &#39;no_cycle&#39;)</span>
+<span class="sd">        self.assertIsNone(response.context[&#39;cycle&#39;])</span>
+<span class="sd">    </span>
+<span class="sd">    def test_home_view_with_active_cycle(self):</span>
+<span class="sd">        # Test home view with active budget cycle.</span>
+<span class="sd">        cycle = Cycle.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            total_allowance=1000,</span>
+<span class="sd">            start_date=timezone.now().date(),</span>
+<span class="sd">            end_date=timezone.now().date() + timedelta(days=30),</span>
+<span class="sd">            is_active=True</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.status_code, 200)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;cycle&#39;], cycle)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;status&#39;], &#39;active&#39;)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;total_spent&#39;], 0)</span>
+<span class="sd">    </span>
+<span class="sd">    def test_home_view_with_expenses(self):</span>
+<span class="sd">        # Test home view with existing expenses.</span>
+<span class="sd">        cycle = Cycle.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            total_allowance=1000,</span>
+<span class="sd">            start_date=timezone.now().date(),</span>
+<span class="sd">            end_date=timezone.now().date() + timedelta(days=30),</span>
+<span class="sd">            is_active=True</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        category = Category.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            name=&#39;Food&#39;</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        Expense.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            cycle=cycle,</span>
+<span class="sd">            category=category,</span>
+<span class="sd">            amount=Decimal(&#39;50.00&#39;)</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;total_spent&#39;], Decimal(&#39;50.00&#39;))</span>
+<span class="sd">        self.assertEqual(response.context[&#39;remaining_budget&#39;], Decimal(&#39;950.00&#39;))</span>
+<span class="sd">        self.assertEqual(response.context[&#39;progress_percent&#39;], 5)</span>
+<span class="sd">    </span>
+<span class="sd">    def test_home_view_overspent(self):</span>
+<span class="sd">        # Test home view when budget is exceeded.</span>
+<span class="sd">        cycle = Cycle.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            total_allowance=100,</span>
+<span class="sd">            start_date=timezone.now().date(),</span>
+<span class="sd">            end_date=timezone.now().date() + timedelta(days=30),</span>
+<span class="sd">            is_active=True</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        category = Category.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            name=&#39;Food&#39;</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        Expense.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            cycle=cycle,</span>
+<span class="sd">            category=category,</span>
+<span class="sd">            amount=Decimal(&#39;150.00&#39;)</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;status&#39;], &#39;overspent&#39;)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;remaining_budget&#39;], Decimal(&#39;-50.00&#39;))</span>
+<span class="sd">    </span>
+<span class="sd">    def test_home_view_ended_cycle(self):</span>
+<span class="sd">        # Test home view for ended cycle.</span>
+<span class="sd">        cycle = Cycle.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            total_allowance=1000,</span>
+<span class="sd">            start_date=timezone.now().date() - timedelta(days=60),</span>
+<span class="sd">            end_date=timezone.now().date() - timedelta(days=1),</span>
+<span class="sd">            is_active=True</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertEqual(response.context[&#39;status&#39;], &#39;ended&#39;)</span>
+<span class="sd">    </span>
+<span class="sd">    def test_daily_limit_calculation(self):</span>
+<span class="sd">        # Test safe daily limit calculation.</span>
+<span class="sd">        cycle = Cycle.objects.create(</span>
+<span class="sd">            user=self.user,</span>
+<span class="sd">            total_allowance=1000,</span>
+<span class="sd">            start_date=timezone.now().date(),</span>
+<span class="sd">            end_date=timezone.now().date() + timedelta(days=30),</span>
+<span class="sd">            is_active=True</span>
+<span class="sd">        )</span>
+<span class="sd">        </span>
+<span class="sd">        # No expenses yet: remaining = 1000, days = 31</span>
+<span class="sd">        # Safe limit = 1000 / 31 ≈ 32.26</span>
+<span class="sd">        response = self.client.get(&#39;/home/&#39;)</span>
+<span class="sd">        self.assertAlmostEqual(</span>
+<span class="sd">            float(response.context[&#39;safe_daily_limit&#39;]), </span>
+<span class="sd">            32.26, </span>
+<span class="sd">            places=1</span>
+<span class="sd">        )</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># TEMPLATE CONTEXT REFERENCE</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Template Variables Available in main.html:</span>
+
+<span class="sd">┌─────────────────────────────────────────────────────────────────────────────┐</span>
+<span class="sd">│ Variable              │ Type        │ Description                          │</span>
+<span class="sd">├─────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="sd">│ cycle                 │ Cycle/None  │ Current active budget cycle         │</span>
+<span class="sd">│ cycle.start_date      │ Date        │ Start date of budget cycle          │</span>
+<span class="sd">│ cycle.end_date        │ Date        │ End date of budget cycle            │</span>
+<span class="sd">│ cycle.total_allowance │ Decimal     │ Total budget amount                 │</span>
+<span class="sd">│ cycle.is_active       │ Boolean     │ Whether cycle is active             │</span>
+<span class="sd">├─────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="sd">│ total_spent           │ Decimal     │ Total amount spent                  │</span>
+<span class="sd">│ remaining_budget      │ Decimal/None│ Budget remaining                    │</span>
+<span class="sd">│ safe_daily_limit      │ Decimal/None│ Recommended daily spending limit    │</span>
+<span class="sd">│ today_spent           │ Decimal     │ Today&#39;s spending total              │</span>
+<span class="sd">├─────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="sd">│ progress_percent      │ Integer     │ Budget usage percentage (0-100)     │</span>
+<span class="sd">│ days_remaining        │ Integer/None│ Days left in cycle                  │</span>
+<span class="sd">├─────────────────────────────────────────────────────────────────────────────┤</span>
+<span class="sd">│ status                │ String      │ &#39;active&#39;, &#39;ended&#39;, &#39;overspent&#39;,      │</span>
+<span class="sd">│                       │             │ &#39;no_cycle&#39;                          │</span>
+<span class="sd">│ over_daily_limit      │ Boolean     │ Warning flag for daily limit excess │</span>
+<span class="sd">└─────────────────────────────────────────────────────────────────────────────┘</span>
+
+<span class="sd">Template Example with Bootstrap:</span>
+
+<span class="sd">{% if status == &#39;no_cycle&#39; %}</span>
+<span class="sd">    &lt;div class=&quot;alert alert-info&quot;&gt;</span>
+<span class="sd">        &lt;h4&gt;Welcome to Expense Tracker!&lt;/h4&gt;</span>
+<span class="sd">        &lt;p&gt;Get started by setting up your budget cycle:&lt;/p&gt;</span>
+<span class="sd">        &lt;a href=&quot;{% url &#39;setCycle&#39; %}&quot; class=&quot;btn btn-primary&quot;&gt;</span>
+<span class="sd">            Set Up Budget Cycle</span>
+<span class="sd">        &lt;/a&gt;</span>
+<span class="sd">    &lt;/div&gt;</span>
+<span class="sd">{% else %}</span>
+<span class="sd">    &lt;div class=&quot;budget-overview&quot;&gt;</span>
+<span class="sd">        &lt;h3&gt;Budget Overview&lt;/h3&gt;</span>
+<span class="sd">        </span>
+<span class="sd">        &lt;!-- Progress Bar --&gt;</span>
+<span class="sd">        &lt;div class=&quot;progress mb-3&quot;&gt;</span>
+<span class="sd">            &lt;div class=&quot;progress-bar {% if progress_percent &gt; 80 %}bg-warning{% endif %}&quot;</span>
+<span class="sd">                 style=&quot;width: {{ progress_percent }}%&quot;</span>
+<span class="sd">                 role=&quot;progressbar&quot;&gt;</span>
+<span class="sd">                {{ progress_percent }}%</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        &lt;/div&gt;</span>
+<span class="sd">        </span>
+<span class="sd">        &lt;!-- Budget Metrics --&gt;</span>
+<span class="sd">        &lt;div class=&quot;row&quot;&gt;</span>
+<span class="sd">            &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="sd">                &lt;div class=&quot;card&quot;&gt;</span>
+<span class="sd">                    &lt;div class=&quot;card-body&quot;&gt;</span>
+<span class="sd">                        &lt;h5&gt;Total Budget&lt;/h5&gt;</span>
+<span class="sd">                        &lt;p&gt;${{ cycle.total_allowance }}&lt;/p&gt;</span>
+<span class="sd">                    &lt;/div&gt;</span>
+<span class="sd">                &lt;/div&gt;</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">            &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="sd">                &lt;div class=&quot;card&quot;&gt;</span>
+<span class="sd">                    &lt;div class=&quot;card-body&quot;&gt;</span>
+<span class="sd">                        &lt;h5&gt;Total Spent&lt;/h5&gt;</span>
+<span class="sd">                        &lt;p&gt;${{ total_spent }}&lt;/p&gt;</span>
+<span class="sd">                    &lt;/div&gt;</span>
+<span class="sd">                &lt;/div&gt;</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">            &lt;div class=&quot;col-md-4&quot;&gt;</span>
+<span class="sd">                &lt;div class=&quot;card&quot;&gt;</span>
+<span class="sd">                    &lt;div class=&quot;card-body&quot;&gt;</span>
+<span class="sd">                        &lt;h5&gt;Remaining&lt;/h5&gt;</span>
+<span class="sd">                        &lt;p&gt;${{ remaining_budget }}&lt;/p&gt;</span>
+<span class="sd">                    &lt;/div&gt;</span>
+<span class="sd">                &lt;/div&gt;</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        &lt;/div&gt;</span>
+<span class="sd">        </span>
+<span class="sd">        &lt;!-- Daily Limit Alert --&gt;</span>
+<span class="sd">        {% if over_daily_limit %}</span>
+<span class="sd">            &lt;div class=&quot;alert alert-warning mt-3&quot;&gt;</span>
+<span class="sd">                &lt;strong&gt;⚠️ Daily Limit Exceeded!&lt;/strong&gt;&lt;br&gt;</span>
+<span class="sd">                You&#39;ve spent ${{ today_spent }} today.&lt;br&gt;</span>
+<span class="sd">                Your safe daily limit is ${{ safe_daily_limit }}.</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        {% endif %}</span>
+<span class="sd">        </span>
+<span class="sd">        &lt;!-- Status Messages --&gt;</span>
+<span class="sd">        {% if status == &#39;ended&#39; %}</span>
+<span class="sd">            &lt;div class=&quot;alert alert-secondary&quot;&gt;</span>
+<span class="sd">                Your budget cycle has ended. Create a new cycle to continue.</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        {% elif status == &#39;overspent&#39; %}</span>
+<span class="sd">            &lt;div class=&quot;alert alert-danger&quot;&gt;</span>
+<span class="sd">                &lt;strong&gt;Budget Exceeded!&lt;/strong&gt; You have overspent by ${{ remaining_budget|slugify }}.</span>
+<span class="sd">            &lt;/div&gt;</span>
+<span class="sd">        {% endif %}</span>
+<span class="sd">        </span>
+<span class="sd">        &lt;!-- Daily Limit Info --&gt;</span>
+<span class="sd">        &lt;div class=&quot;alert alert-info mt-3&quot;&gt;</span>
+<span class="sd">            &lt;strong&gt;Daily Safe Limit:&lt;/strong&gt; ${{ safe_daily_limit|floatformat:2 }}&lt;br&gt;</span>
+<span class="sd">            &lt;small&gt;Based on remaining budget and days left in cycle&lt;/small&gt;</span>
+<span class="sd">        &lt;/div&gt;</span>
+<span class="sd">    &lt;/div&gt;</span>
+<span class="sd">{% endif %}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># PERFORMANCE OPTIMIZATION NOTES</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Database Query Optimization:</span>
+
+<span class="sd">Current Queries (2 per request):</span>
+<span class="sd">    1. Cycle.objects.filter(user=request.user, is_active=True).first()</span>
+<span class="sd">    2. Expense.objects.filter(user=request.user, cycle=cycle).aggregate(total=Sum(&#39;amount&#39;))</span>
+<span class="sd">    3. Expense.objects.filter(user=request.user, cycle=cycle, time_stamp__date=today).aggregate(...)</span>
+
+<span class="sd">Potential Optimizations:</span>
+
+<span class="sd">1. Combine aggregates into a single query:</span>
+<span class="sd">   </span>
+<span class="sd">   from django.db.models import Sum, Q</span>
+<span class="sd">   </span>
+<span class="sd">   aggregates = Expense.objects.filter(</span>
+<span class="sd">       user=request.user, cycle=cycle</span>
+<span class="sd">   ).aggregate(</span>
+<span class="sd">       total=Sum(&#39;amount&#39;),</span>
+<span class="sd">       today_total=Sum(&#39;amount&#39;, filter=Q(time_stamp__date=today))</span>
+<span class="sd">   )</span>
+<span class="sd">   total_spent = aggregates[&#39;total&#39;] or Decimal(&#39;0.00&#39;)</span>
+<span class="sd">   today_spent = aggregates[&#39;today_total&#39;] or Decimal(&#39;0.00&#39;)</span>
+
+<span class="sd">2. Use select_related() to prefetch cycle data:</span>
+<span class="sd">   </span>
+<span class="sd">   cycle = Cycle.objects.select_related(&#39;user&#39;).filter(</span>
+<span class="sd">       user=request.user, is_active=True</span>
+<span class="sd">   ).first()</span>
+
+<span class="sd">3. Add database indexes for better performance:</span>
+<span class="sd">   </span>
+<span class="sd">   class Expense(models.Model):</span>
+<span class="sd">       class Meta:</span>
+<span class="sd">           indexes = [</span>
+<span class="sd">               models.Index(fields=[&#39;user&#39;, &#39;cycle&#39;]),</span>
+<span class="sd">               models.Index(fields=[&#39;time_stamp&#39;]),</span>
+<span class="sd">           ]</span>
+
+<span class="sd">4. Cache frequently accessed data:</span>
+<span class="sd">   </span>
+<span class="sd">   from django.core.cache import cache</span>
+<span class="sd">   </span>
+<span class="sd">   cache_key = f&#39;budget_metrics_{request.user.id}&#39;</span>
+<span class="sd">   metrics = cache.get(cache_key)</span>
+<span class="sd">   if not metrics:</span>
+<span class="sd">       metrics = calculate_metrics()</span>
+<span class="sd">       cache.set(cache_key, metrics, 300)  # Cache for 5 minutes</span>
+
+<span class="sd">5. Use values() to limit fields retrieved:</span>
+<span class="sd">   </span>
+<span class="sd">   cycle = Cycle.objects.filter(</span>
+<span class="sd">       user=request.user, is_active=True</span>
+<span class="sd">   ).values(&#39;total_allowance&#39;, &#39;end_date&#39;).first()</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ============================================================================</span>
+<span class="c1"># SECURITY CONSIDERATIONS</span>
+<span class="c1"># ============================================================================</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Security Notes for Home View:</span>
+
+<span class="sd">1. Authentication Check:</span>
+<span class="sd">   - @login_required ensures only authenticated users can access</span>
+<span class="sd">   - Redirects to login page with &#39;next&#39; parameter for return URL</span>
+<span class="sd">   - Safe for session hijacking prevention</span>
+
+<span class="sd">2. User Isolation:</span>
+<span class="sd">   - All queries filter by request.user</span>
+<span class="sd">   - Prevents users from seeing other users&#39; data</span>
+<span class="sd">   - Database-level filtering ensures security</span>
+
+<span class="sd">3. Data Exposure:</span>
+<span class="sd">   - Only non-sensitive budget information exposed</span>
+<span class="sd">   - No personal identifiable information in response</span>
+<span class="sd">   - No raw database queries or SQL exposure</span>
+
+<span class="sd">4. Decimal Precision:</span>
+<span class="sd">   - Uses Decimal for financial calculations (not float)</span>
+<span class="sd">   - Prevents floating-point rounding errors</span>
+<span class="sd">   - Maintains monetary accuracy</span>
+
+<span class="sd">5. Template Context Safety:</span>
+<span class="sd">   - All data passed to template is safe</span>
+<span class="sd">   - Django&#39;s auto-escaping prevents XSS attacks</span>
+<span class="sd">   - No user input directly in calculations</span>
+
+<span class="sd">6. Rate Limiting (Recommendation):</span>
+<span class="sd">   Consider adding rate limiting for production:</span>
+<span class="sd">   </span>
+<span class="sd">   from django_ratelimit.decorators import ratelimit</span>
+<span class="sd">   </span>
+<span class="sd">   @ratelimit(key=&#39;user&#39;, rate=&#39;60/m&#39;, method=&#39;GET&#39;)</span>
+<span class="sd">   @login_required(login_url=&#39;login&#39;)</span>
+<span class="sd">   def home(request):</span>
+<span class="sd">       # Limit to 60 requests per minute per user</span>
+<span class="sd">       pass</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Abdelrahman Mohamed Abdelrahman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

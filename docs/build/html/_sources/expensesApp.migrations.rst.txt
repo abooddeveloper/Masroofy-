@@ -1,0 +1,50 @@
+expensesApp.migrations package
+==============================
+
+Submodules
+----------
+
+expensesApp.migrations.0001\_initial module
+-------------------------------------------
+
+.. automodule:: expensesApp.migrations.0001_initial
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:
+
+expensesApp.migrations.0002\_alter\_category\_icon module
+---------------------------------------------------------
+
+.. automodule:: expensesApp.migrations.0002_alter_category_icon
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:
+
+expensesApp.migrations.0003\_alter\_category\_icon module
+---------------------------------------------------------
+
+.. automodule:: expensesApp.migrations.0003_alter_category_icon
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:
+
+expensesApp.migrations.0004\_alter\_category\_icon module
+---------------------------------------------------------
+
+.. automodule:: expensesApp.migrations.0004_alter_category_icon
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: expensesApp.migrations
+   :members:
+   :private-members:
+   :show-inheritance:
+   :undoc-members:

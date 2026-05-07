@@ -1,0 +1,993 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>softwareProject package &mdash; Masroofy 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=8d563738"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="manage module" href="manage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Masroofy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">django project documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="expensesApp.html">expensesApp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">softwareProject package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject.asgi">softwareProject.asgi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject.settings">softwareProject.settings module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.BASE_DIR"><code class="docutils literal notranslate"><span class="pre">BASE_DIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.DEBUG"><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.ALLOWED_HOSTS"><code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.INSTALLED_APPS"><code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.AUTH_USER_MODEL"><code class="docutils literal notranslate"><span class="pre">AUTH_USER_MODEL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.MIDDLEWARE"><code class="docutils literal notranslate"><span class="pre">MIDDLEWARE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.ROOT_URLCONF"><code class="docutils literal notranslate"><span class="pre">ROOT_URLCONF</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.TEMP_DIR"><code class="docutils literal notranslate"><span class="pre">TEMP_DIR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.TEMPLATES"><code class="docutils literal notranslate"><span class="pre">TEMPLATES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.WSGI_APPLICATION"><code class="docutils literal notranslate"><span class="pre">WSGI_APPLICATION</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.DATABASES"><code class="docutils literal notranslate"><span class="pre">DATABASES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.AUTH_PASSWORD_VALIDATORS"><code class="docutils literal notranslate"><span class="pre">AUTH_PASSWORD_VALIDATORS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.LANGUAGE_CODE"><code class="docutils literal notranslate"><span class="pre">LANGUAGE_CODE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.TIME_ZONE"><code class="docutils literal notranslate"><span class="pre">TIME_ZONE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.USE_I18N"><code class="docutils literal notranslate"><span class="pre">USE_I18N</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.USE_TZ"><code class="docutils literal notranslate"><span class="pre">USE_TZ</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.STATIC_URL"><code class="docutils literal notranslate"><span class="pre">STATIC_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.MEDIA_URL"><code class="docutils literal notranslate"><span class="pre">MEDIA_URL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.STATICFILES_DIRS"><code class="docutils literal notranslate"><span class="pre">STATICFILES_DIRS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.STATIC_ROOT"><code class="docutils literal notranslate"><span class="pre">STATIC_ROOT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.settings.MEDIA_ROOT"><code class="docutils literal notranslate"><span class="pre">MEDIA_ROOT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject.urls">softwareProject.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject.views">softwareProject.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#softwareProject.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject.wsgi">softwareProject.wsgi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-softwareProject">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">softwareProject package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject.asgi">softwareProject.asgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject.settings">softwareProject.settings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.BASE_DIR"><code class="docutils literal notranslate"><span class="pre">BASE_DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.DEBUG"><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.ALLOWED_HOSTS"><code class="docutils literal notranslate"><span class="pre">ALLOWED_HOSTS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.INSTALLED_APPS"><code class="docutils literal notranslate"><span class="pre">INSTALLED_APPS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.AUTH_USER_MODEL"><code class="docutils literal notranslate"><span class="pre">AUTH_USER_MODEL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.MIDDLEWARE"><code class="docutils literal notranslate"><span class="pre">MIDDLEWARE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.ROOT_URLCONF"><code class="docutils literal notranslate"><span class="pre">ROOT_URLCONF</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.TEMP_DIR"><code class="docutils literal notranslate"><span class="pre">TEMP_DIR</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.TEMPLATES"><code class="docutils literal notranslate"><span class="pre">TEMPLATES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.WSGI_APPLICATION"><code class="docutils literal notranslate"><span class="pre">WSGI_APPLICATION</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.DATABASES"><code class="docutils literal notranslate"><span class="pre">DATABASES</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.AUTH_PASSWORD_VALIDATORS"><code class="docutils literal notranslate"><span class="pre">AUTH_PASSWORD_VALIDATORS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.LANGUAGE_CODE"><code class="docutils literal notranslate"><span class="pre">LANGUAGE_CODE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.TIME_ZONE"><code class="docutils literal notranslate"><span class="pre">TIME_ZONE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.USE_I18N"><code class="docutils literal notranslate"><span class="pre">USE_I18N</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.USE_TZ"><code class="docutils literal notranslate"><span class="pre">USE_TZ</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.STATIC_URL"><code class="docutils literal notranslate"><span class="pre">STATIC_URL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.MEDIA_URL"><code class="docutils literal notranslate"><span class="pre">MEDIA_URL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.STATICFILES_DIRS"><code class="docutils literal notranslate"><span class="pre">STATICFILES_DIRS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.STATIC_ROOT"><code class="docutils literal notranslate"><span class="pre">STATIC_ROOT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.settings.MEDIA_ROOT"><code class="docutils literal notranslate"><span class="pre">MEDIA_ROOT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject.urls">softwareProject.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject.views">softwareProject.views module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#softwareProject.views.home"><code class="docutils literal notranslate"><span class="pre">home()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject.wsgi">softwareProject.wsgi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-softwareProject">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="expensesApp.html">expensesApp package</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Indices:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="search.html">Search Page</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Masroofy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">django project documentation</a></li>
+      <li class="breadcrumb-item active">softwareProject package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/softwareProject.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="softwareproject-package">
+<h1>softwareProject package<a class="headerlink" href="#softwareproject-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-softwareProject.asgi">
+<span id="softwareproject-asgi-module"></span><h2>softwareProject.asgi module<a class="headerlink" href="#module-softwareProject.asgi" title="Link to this heading"></a></h2>
+<p>ASGI config for softwareProject project.</p>
+<p>It exposes the ASGI callable as a module-level variable named <code class="docutils literal notranslate"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/">https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/</a></p>
+</section>
+<section id="module-softwareProject.settings">
+<span id="softwareproject-settings-module"></span><h2>softwareProject.settings module<a class="headerlink" href="#module-softwareProject.settings" title="Link to this heading"></a></h2>
+<p>Django settings for softwareProject project.</p>
+<p>This module contains all configuration settings for the expense tracking
+application, including database configuration, installed apps, middleware,
+templates, static files, and security settings.</p>
+<p>Generated by ‘django-admin startproject’ using Django 6.0.4.</p>
+<dl class="simple">
+<dt>For more information on this file, see:</dt><dd><p><a class="reference external" href="https://docs.djangoproject.com/en/6.0/topics/settings/">https://docs.djangoproject.com/en/6.0/topics/settings/</a></p>
+</dd>
+<dt>For the full list of settings and their values, see:</dt><dd><p><a class="reference external" href="https://docs.djangoproject.com/en/6.0/ref/settings/">https://docs.djangoproject.com/en/6.0/ref/settings/</a></p>
+</dd>
+<dt>Environment:</dt><dd><p>Development configuration - NOT suitable for production
+DEBUG=True - Do not use in production environment</p>
+</dd>
+<dt>Security Warning:</dt><dd><p>This settings file contains sensitive information (SECRET_KEY).
+Never commit this file to public repositories in production.
+Use environment variables for production deployments.</p>
+</dd>
+</dl>
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.BASE_DIR">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">BASE_DIR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">WindowsPath('D:/django</span> <span class="pre">project</span> <span class="pre">documentation')</span></span><a class="headerlink" href="#softwareProject.settings.BASE_DIR" title="Link to this definition"></a></dt>
+<dd><p>Base directory of the Django project.</p>
+<p>Calculated as the parent directory of the directory containing this file.
+Used as reference point for constructing absolute paths throughout settings.</p>
+<p class="rubric">Example</p>
+<p>BASE_DIR / ‘db.sqlite3’ → /path/to/project/db.sqlite3
+BASE_DIR / ‘static’ → /path/to/project/static</p>
+<p>Type: pathlib.Path object (cross-platform path handling)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.SECRET_KEY">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">SECRET_KEY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django-insecure-v1k8^#l$kaweg)2_ril^tdm%10u5)roj6-s$r1ay^v%ctao#xr'</span></span><a class="headerlink" href="#softwareProject.settings.SECRET_KEY" title="Link to this definition"></a></dt>
+<dd><p>Secret key for cryptographic signing.</p>
+<dl class="simple">
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Session signing</p></li>
+<li><p>CSRF protection</p></li>
+<li><p>Password reset tokens</p></li>
+<li><p>Message signing</p></li>
+<li><p>Cryptographic hashing</p></li>
+</ul>
+</dd>
+<dt>Security Warning:</dt><dd><p>This is a development key (starts with ‘django-insecure’).</p>
+</dd>
+<dt>Production Requirements:</dt><dd><p>MUST be changed to a secure, random string.
+Use: from django.core.management.utils import get_random_secret_key
+Or use environment variables: SECRET_KEY = os.environ.get(‘DJANGO_SECRET_KEY’)</p>
+</dd>
+</dl>
+<p>Never commit production secret keys to version control.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.DEBUG">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">DEBUG</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#softwareProject.settings.DEBUG" title="Link to this definition"></a></dt>
+<dd><p>Debug mode setting.</p>
+<dl class="simple">
+<dt>When True (Development):</dt><dd><ul class="simple">
+<li><p>Shows detailed error pages with tracebacks</p></li>
+<li><p>Enables automatic template reloading</p></li>
+<li><p>Static files served by Django</p></li>
+<li><p>SQL queries logged</p></li>
+<li><p>Displays Python variables in error pages</p></li>
+</ul>
+</dd>
+<dt>When False (Production):</dt><dd><ul class="simple">
+<li><p>Shows generic error pages (404, 500)</p></li>
+<li><p>Disables detailed error reporting</p></li>
+<li><p>Requires proper static file serving (nginx/CDN)</p></li>
+<li><p>Should implement ALLOWED_HOSTS</p></li>
+</ul>
+</dd>
+<dt>Security Warning:</dt><dd><p>MUST be set to False in production to prevent:
+- Code execution disclosure
+- Sensitive data leaks
+- Cross-site scripting vulnerabilities
+- Database query exposure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.ALLOWED_HOSTS">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">ALLOWED_HOSTS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="headerlink" href="#softwareProject.settings.ALLOWED_HOSTS" title="Link to this definition"></a></dt>
+<dd><p>List of host/domain names that Django can serve.</p>
+<dl class="simple">
+<dt>Development:</dt><dd><p>Empty list means localhost/127.0.0.1 and ‘localhost’ only
+(Not allowed when DEBUG=False)</p>
+</dd>
+<dt>Production Requirements:</dt><dd><p>Must list all domains serving the application:
+Example: ALLOWED_HOSTS = [‘example.com’, ‘www.example.com’, ‘your-domain.com’]</p>
+</dd>
+<dt>Security:</dt><dd><p>Prevents HTTP Host header attacks
+Django will reject requests with invalid Host headers</p>
+</dd>
+<dt>To allow all hosts (not recommended):</dt><dd><p>ALLOWED_HOSTS = [‘*’]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.INSTALLED_APPS">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">INSTALLED_APPS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['django.contrib.admin',</span> <span class="pre">'django.contrib.auth',</span> <span class="pre">'django.contrib.contenttypes',</span> <span class="pre">'django.contrib.sessions',</span> <span class="pre">'django.contrib.messages',</span> <span class="pre">'django.contrib.staticfiles',</span> <span class="pre">'register_login',</span> <span class="pre">'expensesApp']</span></span><a class="headerlink" href="#softwareProject.settings.INSTALLED_APPS" title="Link to this definition"></a></dt>
+<dd><p>List of installed Django applications.</p>
+<dl class="simple">
+<dt>Application categories:</dt><dd><ol class="arabic simple">
+<li><p>Django Built-in: Core framework functionality</p></li>
+<li><p>Custom Apps: Project-specific functionality</p></li>
+</ol>
+</dd>
+<dt>Order Notes:</dt><dd><ul class="simple">
+<li><p>Apps are loaded in the order listed</p></li>
+<li><p>Custom apps should come after Django core apps</p></li>
+<li><p>App names must match directory names in project</p></li>
+</ul>
+</dd>
+<dt>Each app provides:</dt><dd><ul class="simple">
+<li><p>Models (database tables)</p></li>
+<li><p>Views (business logic)</p></li>
+<li><p>Templates (HTML rendering)</p></li>
+<li><p>Static files (CSS/JS)</p></li>
+<li><p>URL configurations</p></li>
+<li><p>Management commands (optional)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.AUTH_USER_MODEL">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">AUTH_USER_MODEL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'register_login.userRegistration'</span></span><a class="headerlink" href="#softwareProject.settings.AUTH_USER_MODEL" title="Link to this definition"></a></dt>
+<dd><p>Custom user model for authentication.</p>
+<p>Replaces Django’s default User model with custom userRegistration model.</p>
+<dl class="simple">
+<dt>Why Custom User Model:</dt><dd><ul class="simple">
+<li><p>Added is_first_login field for onboarding workflow</p></li>
+<li><p>Custom username field with length constraints</p></li>
+<li><p>Future expansion capabilities (can add more fields later)</p></li>
+<li><p>Best practice: Always use custom user model in new projects</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Must be set before creating any migrations
+Changing this after migrations requires database modifications</p>
+</div>
+<dl class="simple">
+<dt>Usage:</dt><dd><p>from django.contrib.auth import get_user_model
+User = get_user_model()  # Returns userRegistration class</p>
+</dd>
+<dt>Example in views:</dt><dd><p>user = get_user_model().objects.get(id=1)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.MIDDLEWARE">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">MIDDLEWARE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['django.middleware.security.SecurityMiddleware',</span> <span class="pre">'django.contrib.sessions.middleware.SessionMiddleware',</span> <span class="pre">'django.middleware.common.CommonMiddleware',</span> <span class="pre">'django.middleware.csrf.CsrfViewMiddleware',</span> <span class="pre">'django.contrib.auth.middleware.AuthenticationMiddleware',</span> <span class="pre">'django.contrib.messages.middleware.MessageMiddleware',</span> <span class="pre">'django.middleware.clickjacking.XFrameOptionsMiddleware']</span></span><a class="headerlink" href="#softwareProject.settings.MIDDLEWARE" title="Link to this definition"></a></dt>
+<dd><p>Request/response middleware pipeline.</p>
+<dl class="simple">
+<dt>Middleware execution order:</dt><dd><p>Request → Each middleware processes request (top to bottom)
+Response ← Each middleware processes response (bottom to top)</p>
+</dd>
+<dt>Middleware Purposes:</dt><dd><ol class="arabic simple">
+<li><p>Security: Adds security headers, HSTS, XSS protection</p></li>
+<li><p>Sessions: Manages user session data and cookies</p></li>
+<li><p>Common: Handles URL rewriting, ETags, content negotiation</p></li>
+<li><p>CSRF: Protects against cross-site request forgery attacks</p></li>
+<li><p>Authentication: Associates logged-in users with requests</p></li>
+<li><p>Messages: Handles one-time flash messages for user feedback</p></li>
+<li><p>XFrame: Prevents clickjacking attacks (page embedding)</p></li>
+</ol>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Order is extremely important - do not change unless you understand dependencies
+CSRF middleware must come after SessionMiddleware
+Authentication middleware must come after SessionMiddleware</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.ROOT_URLCONF">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">ROOT_URLCONF</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'softwareProject.urls'</span></span><a class="headerlink" href="#softwareProject.settings.ROOT_URLCONF" title="Link to this definition"></a></dt>
+<dd><p>Root URL configuration module.</p>
+<p>Points to the main urls.py file that handles URL routing for the entire project.</p>
+<p class="rubric">Example</p>
+<p>ROOT_URLCONF = ‘softwareProject.urls’ → uses softwareProject/urls.py</p>
+<dl class="simple">
+<dt>Usage:</dt><dd><p>This module defines the top-level URL patterns that delegate
+to individual app URL configurations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.TEMP_DIR">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">TEMP_DIR</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'D:\\django</span> <span class="pre">project</span> <span class="pre">documentation\\softwareProject/templates'</span></span><a class="headerlink" href="#softwareProject.settings.TEMP_DIR" title="Link to this definition"></a></dt>
+<dd><p>Custom template directory path.</p>
+<p>Points to project-level templates directory for shared templates.</p>
+<p>Calculated as: softwareProject/templates/
+Type: String (absolute path)</p>
+<dl class="simple">
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Store base templates used across multiple apps</p></li>
+<li><p>Override app templates when needed</p></li>
+<li><p>Keep organization-wide templates in one location</p></li>
+</ul>
+</dd>
+<dt>Example Structure:</dt><dd><p>softwareProject/templates/
+├── base.html          # Base template for all pages
+├── main.html          # Home page template
+└── includes/          # Reusable template components</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.TEMPLATES">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">TEMPLATES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[{'APP_DIRS':</span> <span class="pre">True,</span> <span class="pre">'BACKEND':</span> <span class="pre">'django.template.backends.django.DjangoTemplates',</span> <span class="pre">'DIRS':</span> <span class="pre">['D:\\django</span> <span class="pre">project</span> <span class="pre">documentation\\softwareProject/templates'],</span> <span class="pre">'OPTIONS':</span> <span class="pre">{'context_processors':</span> <span class="pre">['django.template.context_processors.request',</span> <span class="pre">'django.contrib.auth.context_processors.auth',</span> <span class="pre">'django.contrib.messages.context_processors.messages']}}]</span></span><a class="headerlink" href="#softwareProject.settings.TEMPLATES" title="Link to this definition"></a></dt>
+<dd><p>Template engine configuration.</p>
+<p>Settings for Django’s template system:</p>
+<dl class="simple">
+<dt>BACKEND:</dt><dd><p>DjangoTemplates - Default template engine (other options: Jinja2)</p>
+</dd>
+<dt>DIRS:</dt><dd><p>List of directories to search for templates
+Includes project-level TEMP_DIR for shared templates</p>
+</dd>
+<dt>APP_DIRS:</dt><dd><p>True - Searches for templates in ‘templates’ subdirectory of each app</p>
+</dd>
+<dt>Context Processors:</dt><dd><ul class="simple">
+<li><p>request: Makes request object available as {{ request }}</p></li>
+<li><p>auth: Makes user object available as {{ user }}</p></li>
+<li><p>messages: Makes flash messages available as {% messages %}</p></li>
+</ul>
+</dd>
+<dt>Template search order:</dt><dd><ol class="arabic simple">
+<li><p>DIRS directories (project-level templates) - highest priority</p></li>
+<li><p>App directories (each app’s templates folder) - lower priority</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.WSGI_APPLICATION">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">WSGI_APPLICATION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'softwareProject.wsgi.application'</span></span><a class="headerlink" href="#softwareProject.settings.WSGI_APPLICATION" title="Link to this definition"></a></dt>
+<dd><p>WSGI application entry point.</p>
+<p>Used for production deployment with WSGI servers.</p>
+<dl class="simple">
+<dt>Example deployment with Gunicorn:</dt><dd><p>gunicorn softwareProject.wsgi:application</p>
+</dd>
+<dt>Example with uWSGI:</dt><dd><p>uwsgi –http :8000 –module softwareProject.wsgi</p>
+</dd>
+</dl>
+<p>For ASGI (async) support, configure ASGI_APPLICATION as well.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.DATABASES">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">DATABASES</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'default':</span> <span class="pre">{'ATOMIC_REQUESTS':</span> <span class="pre">False,</span> <span class="pre">'AUTOCOMMIT':</span> <span class="pre">True,</span> <span class="pre">'CONN_HEALTH_CHECKS':</span> <span class="pre">False,</span> <span class="pre">'CONN_MAX_AGE':</span> <span class="pre">0,</span> <span class="pre">'ENGINE':</span> <span class="pre">'django.db.backends.sqlite3',</span> <span class="pre">'HOST':</span> <span class="pre">'',</span> <span class="pre">'NAME':</span> <span class="pre">WindowsPath('D:/django</span> <span class="pre">project</span> <span class="pre">documentation/db.sqlite3'),</span> <span class="pre">'OPTIONS':</span> <span class="pre">{},</span> <span class="pre">'PASSWORD':</span> <span class="pre">'',</span> <span class="pre">'PORT':</span> <span class="pre">'',</span> <span class="pre">'TEST':</span> <span class="pre">{'CHARSET':</span> <span class="pre">None,</span> <span class="pre">'COLLATION':</span> <span class="pre">None,</span> <span class="pre">'MIGRATE':</span> <span class="pre">True,</span> <span class="pre">'MIRROR':</span> <span class="pre">None,</span> <span class="pre">'NAME':</span> <span class="pre">None},</span> <span class="pre">'TIME_ZONE':</span> <span class="pre">None,</span> <span class="pre">'USER':</span> <span class="pre">''}}</span></span><a class="headerlink" href="#softwareProject.settings.DATABASES" title="Link to this definition"></a></dt>
+<dd><p>Database configuration.</p>
+<dl>
+<dt>Current Configuration (Development):</dt><dd><p>ENGINE: SQLite3 (file-based database, no separate server)
+NAME: db.sqlite3 in project root</p>
+</dd>
+<dt>Advantages of SQLite:</dt><dd><ul class="simple">
+<li><p>Zero configuration (no database server to install)</p></li>
+<li><p>File-based, easy to backup (just copy the file)</p></li>
+<li><p>Great for development and testing</p></li>
+<li><p>No network latency</p></li>
+<li><p>Works on any platform</p></li>
+</ul>
+</dd>
+<dt>Disadvantages:</dt><dd><ul class="simple">
+<li><p>Not suitable for high concurrency</p></li>
+<li><p>Limited features compared to PostgreSQL/MySQL</p></li>
+<li><p>Not recommended for production</p></li>
+</ul>
+</dd>
+<dt>Production Recommendation:</dt><dd><p>Use PostgreSQL for production:</p>
+<dl>
+<dt>DATABASES = {</dt><dd><dl class="simple">
+<dt>‘default’: {</dt><dd><p>‘ENGINE’: ‘django.db.backends.postgresql’,
+‘NAME’: ‘expenses_db’,
+‘USER’: ‘db_user’,
+‘PASSWORD’: ‘secure_password’,
+‘HOST’: ‘localhost’,
+‘PORT’: ‘5432’,</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+<p>Using Environment Variables (recommended for production):</p>
+<p>import os
+DATABASES = {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>‘default’: {</dt><dd><p>‘ENGINE’: ‘django.db.backends.postgresql’,
+‘NAME’: os.environ.get(‘DB_NAME’, ‘expenses_db’),
+‘USER’: os.environ.get(‘DB_USER’, ‘postgres’),
+‘PASSWORD’: os.environ.get(‘DB_PASSWORD’, ‘’),
+‘HOST’: os.environ.get(‘DB_HOST’, ‘localhost’),
+‘PORT’: os.environ.get(‘DB_PORT’, ‘5432’),</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.AUTH_PASSWORD_VALIDATORS">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">AUTH_PASSWORD_VALIDATORS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[{'NAME':</span> <span class="pre">'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},</span> <span class="pre">{'NAME':</span> <span class="pre">'django.contrib.auth.password_validation.MinimumLengthValidator'},</span> <span class="pre">{'NAME':</span> <span class="pre">'django.contrib.auth.password_validation.CommonPasswordValidator'},</span> <span class="pre">{'NAME':</span> <span class="pre">'django.contrib.auth.password_validation.NumericPasswordValidator'}]</span></span><a class="headerlink" href="#softwareProject.settings.AUTH_PASSWORD_VALIDATORS" title="Link to this definition"></a></dt>
+<dd><p>Password validation rules.</p>
+<p>These validators work alongside custom form validators (like the 8-20
+character validation in registration form).</p>
+<p>Validators enforce password strength requirements:</p>
+<ol class="arabic">
+<li><p>UserAttributeSimilarityValidator:
+- Prevents passwords similar to username, email, etc.
+- Checks for common patterns and similarities
+- Example: Password ‘john123’ for username ‘john’ would be rejected</p></li>
+<li><p>MinimumLengthValidator:
+- Enforces minimum password length (default: 8 characters)
+- Can be customized with OPTIONS:</p>
+<blockquote>
+<div><p>{‘OPTIONS’: {‘min_length’: 12}}</p>
+</div></blockquote>
+</li>
+<li><p>CommonPasswordValidator:
+- Blocks commonly used passwords
+- Uses list of 20,000 common passwords
+- Examples: ‘password123’, ‘qwerty’, ‘admin’, ‘12345678’</p></li>
+<li><p>NumericPasswordValidator:
+- Prevents entirely numeric passwords
+- Blocks passwords like ‘12345678’ or ‘11111111’</p></li>
+</ol>
+<dl>
+<dt>Custom Validator Example:</dt><dd><p>Add custom options to MinimumLengthValidator:
+{</p>
+<blockquote>
+<div><p>‘NAME’: ‘django.contrib.auth.password_validation.MinimumLengthValidator’,
+‘OPTIONS’: {‘min_length’: 12}</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These validators apply to all password changes (admin, user forms).
+Custom form validators (8-20 chars) are additional restrictions.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.LANGUAGE_CODE">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">LANGUAGE_CODE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'en-us'</span></span><a class="headerlink" href="#softwareProject.settings.LANGUAGE_CODE" title="Link to this definition"></a></dt>
+<dd><p>Default language code for the site.</p>
+<p>Format: ISO 639-1 language code (2 letters)
+Options: ‘en-us’ (US English), ‘en-gb’ (British English), ‘fr’, ‘es’, ‘de’, etc.</p>
+<dl class="simple">
+<dt>To enable multi-language support:</dt><dd><ul class="simple">
+<li><p>Add USE_I18N = True</p></li>
+<li><p>Create locale directories</p></li>
+<li><p>Use translation functions: {% trans %} in templates</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.TIME_ZONE">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">TIME_ZONE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UTC'</span></span><a class="headerlink" href="#softwareProject.settings.TIME_ZONE" title="Link to this definition"></a></dt>
+<dd><p>Time zone for date/time storage and display.</p>
+<p>Default: ‘UTC’ (Coordinated Universal Time) - recommended for consistency</p>
+<dl class="simple">
+<dt>Other common options:</dt><dd><ul class="simple">
+<li><p>‘America/New_York’ (Eastern Time)</p></li>
+<li><p>‘America/Chicago’ (Central Time)</p></li>
+<li><p>‘America/Los_Angeles’ (Pacific Time)</p></li>
+<li><p>‘Europe/London’ (UK Time)</p></li>
+<li><p>‘Asia/Dubai’ (GST)</p></li>
+<li><p>‘Asia/Tokyo’ (Japan Time)</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Changing after database creation requires data migration.
+All dates/times are stored in UTC in database regardless of this setting.
+This setting only affects display conversion.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.USE_I18N">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">USE_I18N</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#softwareProject.settings.USE_I18N" title="Link to this definition"></a></dt>
+<dd><p>Enable internationalization (i18n) support.</p>
+<dl class="simple">
+<dt>When True:</dt><dd><ul class="simple">
+<li><p>Django’s translation system is active</p></li>
+<li><p>{% trans %} template tags work</p></li>
+<li><p>Language detection middleware can be used</p></li>
+<li><p>Translation files (.po, .mo) are loaded</p></li>
+</ul>
+</dd>
+</dl>
+<p>Set to False if application will only use one language (improves performance).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.USE_TZ">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">USE_TZ</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#softwareProject.settings.USE_TZ" title="Link to this definition"></a></dt>
+<dd><p>Enable timezone-aware datetime handling.</p>
+<dl class="simple">
+<dt>When True (RECOMMENDED):</dt><dd><ul class="simple">
+<li><p>datetime objects are timezone-aware</p></li>
+<li><p>Django uses TIME_ZONE for conversion</p></li>
+<li><p>Times are stored in UTC in database</p></li>
+<li><p>Best for user-facing applications</p></li>
+</ul>
+</dd>
+<dt>When False (Legacy):</dt><dd><ul class="simple">
+<li><p>datetime objects are naive (no timezone)</p></li>
+<li><p>All times are stored in TIME_ZONE setting</p></li>
+<li><p>Can cause issues with daylight saving time</p></li>
+</ul>
+</dd>
+<dt>Best Practice:</dt><dd><p>Keep as True for proper datetime handling across timezones.
+Users in different time zones will see corrected times.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.STATIC_URL">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">STATIC_URL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/softwareProjectstatic/'</span></span><a class="headerlink" href="#softwareProject.settings.STATIC_URL" title="Link to this definition"></a></dt>
+<dd><p>URL prefix for static files (CSS, JavaScript, images).</p>
+<p>This is the URL that will be used to serve static files in templates.</p>
+<p class="rubric">Example</p>
+<p>STATIC_URL = ‘/static/’
+In template: {% static ‘css/style.css’ %}
+Generates URL: /static/css/style.css</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Must end with a slash
+Can be different from STATIC_ROOT
+For production, web server should serve files from STATIC_ROOT at this URL</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.MEDIA_URL">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">MEDIA_URL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/images/'</span></span><a class="headerlink" href="#softwareProject.settings.MEDIA_URL" title="Link to this definition"></a></dt>
+<dd><p>URL prefix for user-uploaded media files.</p>
+<p>This is the URL that will be used to serve media files uploaded by users.</p>
+<p class="rubric">Example</p>
+<p>MEDIA_URL = ‘/media/’
+Model with ImageField: category.icon
+URL generated: /media/category_icon.png</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>User uploads are NOT served by Django in production
+Must configure web server (nginx/Apache) to serve from MEDIA_ROOT</p>
+</div>
+<dl>
+<dt>Example nginx configuration:</dt><dd><dl class="simple">
+<dt>location /images/ {</dt><dd><p>alias /path/to/project/static/images/;</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.STATICFILES_DIRS">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">STATICFILES_DIRS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[WindowsPath('D:/django</span> <span class="pre">project</span> <span class="pre">documentation/static')]</span></span><a class="headerlink" href="#softwareProject.settings.STATICFILES_DIRS" title="Link to this definition"></a></dt>
+<dd><p>Additional directories where Django looks for static files.</p>
+<p>Beyond the ‘static’ directory in each app, these directories are also searched.</p>
+<dl class="simple">
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Project-wide static files (shared across apps)</p></li>
+<li><p>Files that don’t belong to a specific app</p></li>
+<li><p>Third-party static files (outside of installed apps)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>BASE_DIR / ‘static’ contains:</dt><dd><ul class="simple">
+<li><p>css/main.css (project-wide CSS)</p></li>
+<li><p>js/global.js (global JavaScript)</p></li>
+<li><p>images/logo.png (site logo)</p></li>
+<li><p>favicon.ico (browser icon)</p></li>
+</ul>
+</dd>
+<dt>Search Order (collectstatic command):</dt><dd><ol class="arabic simple">
+<li><p>STATICFILES_DIRS directories</p></li>
+<li><p>Static directories in each INSTALLED_APPS</p></li>
+</ol>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The collectstatic command will copy all static files found
+in these directories to STATIC_ROOT for production.</p>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.STATIC_ROOT">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">STATIC_ROOT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">WindowsPath('D:/django</span> <span class="pre">project</span> <span class="pre">documentation/staticfiles')</span></span><a class="headerlink" href="#softwareProject.settings.STATIC_ROOT" title="Link to this definition"></a></dt>
+<dd><p>Directory where static files are collected for production.</p>
+<p>This is the destination directory for the ‘collectstatic’ management command.</p>
+<dl class="simple">
+<dt>Purpose:</dt><dd><ol class="arabic simple">
+<li><p>Collect all static files from all apps and directories</p></li>
+<li><p>Create a single directory for production serving</p></li>
+<li><p>Organize static files for web server configuration</p></li>
+</ol>
+</dd>
+<dt>Management Command:</dt><dd><p>python manage.py collectstatic
+- Copies all static files to STATIC_ROOT directory
+- Must be run before every production deployment</p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Should be an empty directory before collectstatic</p></li>
+<li><p>Do NOT commit this directory to version control</p></li>
+<li><p>Web server should point to this directory for static files</p></li>
+<li><p>Should be excluded in .gitignore: ‘staticfiles/’</p></li>
+</ul>
+</div>
+<dl>
+<dt>Example Nginx Configuration:</dt><dd><dl class="simple">
+<dt>location /static/ {</dt><dd><p>alias /path/to/project/staticfiles/;
+expires 30d;  # Cache static files for 30 days</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="softwareProject.settings.MEDIA_ROOT">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.settings.</span></span><span class="sig-name descname"><span class="pre">MEDIA_ROOT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">WindowsPath('D:/django</span> <span class="pre">project</span> <span class="pre">documentation/static/images')</span></span><a class="headerlink" href="#softwareProject.settings.MEDIA_ROOT" title="Link to this definition"></a></dt>
+<dd><p>Absolute path to directory where user-uploaded media files are stored.</p>
+<dl class="simple">
+<dt>Purpose:</dt><dd><ul class="simple">
+<li><p>Store uploaded files (category icons, user avatars, etc.)</p></li>
+<li><p>Separate location from static files</p></li>
+<li><p>Django writes files here when users upload</p></li>
+</ul>
+</dd>
+<dt>Directory Structure:</dt><dd><ul class="simple">
+<li><p>Category icons: MEDIA_ROOT/category_name/icon.png</p></li>
+<li><p>User uploads organized by app</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Category icon upload → MEDIA_ROOT/icons/food.png
+Full path: /project/static/images/icons/food.png</p>
+<dl>
+<dt>Production Considerations:</dt><dd><ul class="simple">
+<li><p>DO NOT serve with Django in production (inefficient)</p></li>
+<li><p>Configure web server (nginx) to serve from this directory</p></li>
+<li><p>Consider cloud storage (AWS S3, Google Cloud Storage) for scaling</p></li>
+</ul>
+<p>Example nginx configuration:
+location /images/ {</p>
+<blockquote>
+<div><p>alias /path/to/project/static/images/;
+expires 30d;</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>Implement file validation (type, size, content) in forms</p></li>
+<li><p>Scan uploads for malware in production</p></li>
+<li><p>Consider using django-storages for cloud storage</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>User uploads can consume significant disk space</p></li>
+<li><p>Implement cleanup for old/unused files</p></li>
+<li><p>Consider rate limiting for uploads</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-softwareProject.urls">
+<span id="softwareproject-urls-module"></span><h2>softwareProject.urls module<a class="headerlink" href="#module-softwareProject.urls" title="Link to this heading"></a></h2>
+<p>Main Project URL Configuration for softwareProject.</p>
+<p>This module defines the top-level URL patterns for the entire expense tracking
+application. It routes incoming requests to appropriate app-level URL
+configurations and serves static/media files during development.</p>
+<dl class="simple">
+<dt>The <cite>urlpatterns</cite> list routes URLs to views. For more information please see:</dt><dd><p><a class="reference external" href="https://docs.djangoproject.com/en/6.0/topics/http/urls/">https://docs.djangoproject.com/en/6.0/topics/http/urls/</a></p>
+</dd>
+<dt>URL Structure:</dt><dd><p>/admin/          - Django admin interface
+/register/       - User registration (from register_login)
+/login/          - User login (from register_login)
+/logout/         - User logout (from register_login)
+/addExpense/     - Add new expense (from expensesApp)
+/categories/     - Manage categories (from expensesApp)
+/setCycle/       - Budget cycle setup (from expensesApp)
+/insights/       - Spending insights (from expensesApp)
+/home/           - Main dashboard</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<dl class="simple">
+<dt>Function views:</dt><dd><ol class="arabic simple">
+<li><p>Add import: from my_app import views</p></li>
+<li><p>Add URL: path(‘’, views.home, name=’home’)</p></li>
+</ol>
+</dd>
+<dt>Class-based views:</dt><dd><ol class="arabic simple">
+<li><p>Add import: from other_app.views import Home</p></li>
+<li><p>Add URL: path(‘’, Home.as_view(), name=’home’)</p></li>
+</ol>
+</dd>
+<dt>Including another URLconf:</dt><dd><ol class="arabic simple">
+<li><p>Import include(): from django.urls import include, path</p></li>
+<li><p>Add URL: path(‘blog/’, include(‘blog.urls’))</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="module-softwareProject.views">
+<span id="softwareproject-views-module"></span><h2>softwareProject.views module<a class="headerlink" href="#module-softwareProject.views" title="Link to this heading"></a></h2>
+<p>Main Application Views Module.</p>
+<p>This module contains the core views for the root application, including
+the main dashboard/home page that displays budget overview, spending
+metrics, and daily spending limits for authenticated users.</p>
+<dl class="simple">
+<dt>Key Features:</dt><dd><ul class="simple">
+<li><p>Budget cycle overview and status</p></li>
+<li><p>Safe daily limit calculation (server-side)</p></li>
+<li><p>Spending progress tracking with percentage</p></li>
+<li><p>Daily spending alerts</p></li>
+<li><p>Cycle status monitoring (active, ended, overspent)</p></li>
+</ul>
+</dd>
+</dl>
+<p>All views are protected by &#64;login_required decorator to ensure only
+authenticated users can access the dashboard.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="softwareProject.views.home">
+<span class="sig-prename descclassname"><span class="pre">softwareProject.views.</span></span><span class="sig-name descname"><span class="pre">home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/softwareProject/views.html#home"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#softwareProject.views.home" title="Link to this definition"></a></dt>
+<dd><p>Main dashboard view displaying user’s budget cycle status and spending metrics.</p>
+<p>This view serves as the primary dashboard for authenticated users, showing
+real-time budget information including total spent, remaining budget,
+safe daily limit, and spending progress. All calculations are performed
+server-side with no JavaScript required for maximum compatibility and security.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> – HTTP request object from authenticated user</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rendered main.html template with comprehensive budget context data</p>
+</dd>
+</dl>
+<dl>
+<dt>Formula Calculations:</dt><dd><p>total_spent = SUM(expense.amount) for current cycle
+remaining_budget = total_allowance - total_spent
+days_remaining = MAX((end_date - today).days + 1, 1)
+safe_daily_limit = remaining_budget / days_remaining
+progress_percent = MIN((total_spent / total_allowance) * 100, 100)</p>
+</dd>
+<dt>Status Definitions:</dt><dd><ul class="simple">
+<li><p>‘no_cycle’: User has no active budget cycle configured</p></li>
+<li><p>‘active’: Cycle is within date range and budget not exceeded</p></li>
+<li><p>‘ended’: Current date is past cycle end date</p></li>
+<li><p>‘overspent’: Total spending has exceeded total allowance</p></li>
+</ul>
+</dd>
+<dt>Alert Conditions:</dt><dd><ul class="simple">
+<li><p>Shows warning when today_spent &gt; safe_daily_limit (exceeds daily limit)</p></li>
+<li><p>Shows “Cycle Ended” message when today &gt; end_date</p></li>
+<li><p>Shows “Budget Exceeded” message when remaining_budget &lt; 0</p></li>
+<li><p>Shows setup prompt when no cycle exists</p></li>
+</ul>
+</dd>
+<dt>Context Variables:</dt><dd><p>cycle (Cycle/None): Current active budget cycle object
+safe_daily_limit (Decimal/None): Recommended daily spending limit
+total_spent (Decimal): Total amount spent in current cycle
+remaining_budget (Decimal/None): Budget remaining after expenses
+days_remaining (int/None): Number of days left in cycle (minimum 1)
+progress_percent (int): Percentage of budget used (0-100)
+status (str): Cycle status - ‘active’, ‘ended’, ‘overspent’, ‘no_cycle’
+today_spent (Decimal): Total amount spent today
+over_daily_limit (bool): Whether today’s spending exceeds safe limit</p>
+</dd>
+<dt>Example Output:</dt><dd><dl class="simple">
+<dt>If user has a $1000 budget for 30 days and spent $200:</dt><dd><p>total_spent = 200.00
+remaining_budget = 800.00
+days_remaining = 25 (assuming 5 days passed)
+safe_daily_limit = 32.00 (800 / 25)
+progress_percent = 20%
+status = ‘active’</p>
+</dd>
+</dl>
+</dd>
+<dt>Security:</dt><dd><ul class="simple">
+<li><p>&#64;login_required ensures only authenticated users can access</p></li>
+<li><p>Each user only sees their own data via request.user filtering</p></li>
+<li><p>No sensitive data exposed to unauthenticated users</p></li>
+</ul>
+</dd>
+<dt>Performance Notes:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Two database queries maximum:</dt><dd><ol class="arabic simple">
+<li><p>Get active cycle</p></li>
+<li><p>Sum of expenses for cycle</p></li>
+<li><p>Sum of today’s expenses (included in same query pattern)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Uses aggregation for efficient database operations</p></li>
+<li><p>Decimal operations for precise monetary calculations</p></li>
+</ul>
+</dd>
+<dt>Template Usage:</dt><dd><p>{{ cycle.start_date }} - Cycle start date
+{{ cycle.end_date }} - Cycle end date
+{{ cycle.total_allowance }} - Total budget amount
+{{ total_spent }} - Amount spent so far
+{{ remaining_budget }} - Budget remaining
+{{ safe_daily_limit }} - Recommended daily spending limit
+{{ progress_percent }} - Progress bar percentage
+{{ today_spent }} - Today’s spending total
+{{ over_daily_limit }} - Warning flag for excess daily spending
+{{ status }} - Current cycle status</p>
+</dd>
+<dt>Conditional Display Examples:</dt><dd><dl class="simple">
+<dt>{% if status == ‘no_cycle’ %}</dt><dd><p>&lt;a href=”{% url ‘setCycle’ %}”&gt;Set up your budget cycle&lt;/a&gt;</p>
+</dd>
+</dl>
+<p>{% endif %}</p>
+<dl>
+<dt>{% if over_daily_limit %}</dt><dd><dl class="simple">
+<dt>&lt;div class=”alert alert-warning”&gt;</dt><dd><p>⚠️ You’ve exceeded your daily safe limit!</p>
+</dd>
+</dl>
+<p>&lt;/div&gt;</p>
+</dd>
+</dl>
+<p>{% endif %}</p>
+<dl>
+<dt>{% if status == ‘overspent’ %}</dt><dd><dl class="simple">
+<dt>&lt;div class=”alert alert-danger”&gt;</dt><dd><p>❌ You have exceeded your budget!</p>
+</dd>
+</dl>
+<p>&lt;/div&gt;</p>
+</dd>
+</dl>
+<p>{% endif %}</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-softwareProject.wsgi">
+<span id="softwareproject-wsgi-module"></span><h2>softwareProject.wsgi module<a class="headerlink" href="#module-softwareProject.wsgi" title="Link to this heading"></a></h2>
+<p>WSGI config for softwareProject project.</p>
+<p>It exposes the WSGI callable as a module-level variable named <code class="docutils literal notranslate"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/">https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/</a></p>
+</section>
+<section id="module-softwareProject">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-softwareProject" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="manage.html" class="btn btn-neutral float-left" title="manage module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Abdelrahman Mohamed Abdelrahman.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
